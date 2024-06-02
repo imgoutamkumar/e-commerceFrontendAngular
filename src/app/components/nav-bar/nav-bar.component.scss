@@ -1,0 +1,42 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+.nav-bar {
+  background-color: black;
+  height: 70px;
+  color: white;
+
+  .nav-bar-item {
+    margin-right: 10px;
+    color: white;
+  }
+  .nav-bar-item:hover {
+    color: #ff004f;
+  }
+  .signIn-button {
+    margin-right: 20px;
+    background-color: #ff004f;
+    //background: linear-gradient(rgba(243, 243, 243, 0.6), #ff004f);
+    // background-color: #1db954;
+    color: white;
+  }
+  .signIn-button:hover {
+    color: #ff004f;
+    background-color: white;
+  }
+  .profile-icon {
+    width: 44px;
+    height: 44px;
+
+    .profile-icon-image {
+      border-radius: 50%;
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+}
+.my-dialog-class {
+  background-color: #ff0000;
+  color: blue;
+}

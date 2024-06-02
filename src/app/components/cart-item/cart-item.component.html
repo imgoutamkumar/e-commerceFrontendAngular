@@ -1,0 +1,174 @@
+<mat-card>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-3">
+        <div
+          class="p-item"
+          (click)="getProductDetails(cartItemsData.product._id)"
+        >
+          <img
+            class="p-img"
+            mat-card-image
+            [src]="cartItemsData.product.images[0]"
+          />
+        </div>
+      </div>
+      <div class="col-9" style="padding-left: 0">
+        <mat-card-header>
+          <div class="block">
+            <mat-card-title style="font-weight: 300; font-size: 18px">{{
+              cartItemsData.product.title
+            }}</mat-card-title>
+            <mat-card-subtitle
+              style="color: white; font-size: 15px; font-weight: 500"
+              >{{ cartItemsData.product.brand }}</mat-card-subtitle
+            >
+            <div class="flex gap-2">
+              <h3 style="font-weight: 300; margin: 0">
+                Size : {{ cartItemsData.size }}
+              </h3>
+              <h3 style="font-weight: 300; margin: 0">Color : Blue</h3>
+              <h3 style="font-weight: 300; margin: 0">
+                Qty : {{ cartItemsData.quantity }}
+              </h3>
+            </div>
+            <div class="flex gap-2">
+              <h3
+                class="text-gray-400 ; margin: 0"
+                style="text-decoration: line-through"
+              >
+                {{ cartItemsData.product.price | currency : "INR" }}
+              </h3>
+              <h3
+                style="
+                  font-size: 22px;
+                  font-weight: 400;
+                  margin: 0;
+                  color: rgb(7, 214, 7);
+                "
+              >
+                {{
+                  cartItemsData.product.price -
+                    (cartItemsData.product.price *
+                      cartItemsData.product.discountPercent) /
+                      100 | currency : "INR"
+                }}
+              </h3>
+              <h3 style="color: white; font-size: 14px; margin: 0">
+                ({{ cartItemsData.product.discountPercent }}% OFF)
+              </h3>
+            </div>
+          </div>
+        </mat-card-header>
+        <mat-card-actions align="end">
+          <button
+            mat-mini-fab
+            matTooltip="accent"
+            style="
+              font-size: 24px;
+              height: 27px;
+              width: 27px;
+              background-color: rgba(255, 0, 0, 0.5);
+            "
+          >
+            <mat-icon
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+              inline
+              >remove</mat-icon
+            >
+          </button>
+          <p style="margin: 0px 5px; padding: 0px 5px 0px">10</p>
+          <button
+            mat-mini-fab
+            matTooltip="accent"
+            style="
+              font-size: 24px;
+              height: 27px;
+              width: 27px;
+              background-color: rgba(7, 203, 7, 0.5);
+            "
+          >
+            <mat-icon
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+              inline
+              >add</mat-icon
+            >
+          </button>
+          <span class="example-spacer"></span>
+          <div class="removeButton">
+            <button mat-mini-fab class="button-properties" color="warn">
+              <mat-icon
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                "
+                >delete</mat-icon
+              >
+            </button>
+            <span class="title">remove</span>
+          </div>
+          <!--   <button
+            mat-icon-button
+            color="warn"
+            style="/* background-color: red; */"
+          >
+            <mat-icon
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+              >delete</mat-icon
+            >
+          </button> -->
+        </mat-card-actions>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <!-- <mat-card-actions align="end">
+    <button
+      mat-mini-fab
+      matTooltip="accent"
+      aria-label="Example icon-button with a heart icon"
+      style="font-size: 24px; height: 30px; width: 30px"
+    >
+      <mat-icon
+        style="display: flex; align-items: center; justify-content: center"
+        inline
+        >remove</mat-icon
+      >
+    </button>
+    <p style="margin: 0; padding: 0px 5px 0px">10</p>
+    <button
+      mat-mini-fab
+      matTooltip="accent"
+      aria-label="Example icon-button with a heart icon"
+      style="font-size: 24px; height: 30px; width: 30px"
+    >
+      <mat-icon
+        style="display: flex; align-items: center; justify-content: center"
+        inline
+        >add</mat-icon
+      >
+    </button>
+    <span class="example-spacer"></span>
+
+    <button
+      mat-mini-fab
+      color="warn"
+      aria-label="Example icon button with a delete icon"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions> -->
+</mat-card>

@@ -1,0 +1,51 @@
+<app-main-carousel></app-main-carousel>
+<!-- <div style="display: flex">
+  <span
+    ><h1 style="margin: 40px 40px; font-size: 38px; font-weight: 300">
+      Top Deals
+    </h1></span
+  >
+</div>
+
+<app-product-slider [Products]="womensTrendingProduct"></app-product-slider> -->
+<h1 style="margin: 40px 40px; font-size: 38px; font-weight: 300">
+  Biggest Deals on Top Brands
+</h1>
+<div>
+  <swiper-container navigation="true" slides-per-view="2" loop="false">
+    <ng-container *ngFor="let category of categories">
+      <swiper-slide style="display: flex; justify-content: center"
+        ><app-category-card [categoryData]="category"></app-category-card>
+      </swiper-slide>
+    </ng-container>
+  </swiper-container>
+</div>
+
+<h1 style="margin: 40px 40px; font-size: 38px; font-weight: 300">
+  Trending Womens Clothing
+</h1>
+<!-- <app-product-slider
+  [Products]="womensTrendingProduct"
+  (productId)="addToWishlist($event)"
+></app-product-slider> -->
+<swiper-container navigation="true" slides-per-view="6" loop="false">
+  <ng-container *ngFor="let product of womensTrendingProduct">
+    <swiper-slide style="display: flex; justify-content: center">
+      <app-product-card [productData]="product"></app-product-card>
+    </swiper-slide>
+  </ng-container>
+</swiper-container>
+<h1 style="margin: 40px 40px; font-size: 38px; font-weight: 300">
+  Trending Mens Clothing
+</h1>
+<!-- <app-product-slider
+  [Products]="mensTrendingProduct"
+  (productId)="addToWishlist($event)"
+></app-product-slider> -->
+<swiper-container navigation="true" slides-per-view="6" loop="false">
+  <ng-container *ngFor="let product of mensTrendingProduct">
+    <swiper-slide style="display: flex; justify-content: center">
+      <app-product-card [productData]="product"></app-product-card>
+    </swiper-slide>
+  </ng-container>
+</swiper-container>

@@ -1,0 +1,25 @@
+.product-slider {
+  margin: 10px 20px;
+  background-color: #1b1919;
+  border-radius: 6px;
+  padding-top: 10px;
+  .product-slider-items {
+    padding-right: 20px;
+    display: flex;
+    gap: 5px;
+    padding-bottom: 15px;
+    overflow-x: auto;
+    scrollbar-width: normal;
+  }
+  .product-slider-items::-webkit-scrollbar {
+    height: 6px;
+  }
+  .product-slider-items::-webkit-scrollbar-thumb {
+    background: #b35673;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  .product-slider-items::-webkit-scrollbar-thumb:hover {
+    background-color: #ff004f;
+  }
+}

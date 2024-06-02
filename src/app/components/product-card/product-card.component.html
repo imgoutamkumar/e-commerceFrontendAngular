@@ -1,0 +1,68 @@
+<mat-card class="example-card">
+  <div class="p-item">
+    <img class="p-img" mat-card-image [src]="productData.images[0]" />
+    <div
+      class="col col-rows-3 details"
+      (click)="showProductDetails(productData._id)"
+    >
+      <div style="padding: 20px">
+        <div class="row">
+          <h2 style="margin: 0; font-size: 18px">{{ productData.brand }}</h2>
+        </div>
+        <div class="row">
+          <h3
+            style="
+              margin: 0;
+              font-size: 14px;
+              font-weight: 300;
+              line-height: 18px;
+            "
+          >
+            {{ productData.title }}
+          </h3>
+        </div>
+        <div class="row">
+          <h2 style="margin: 0; font-size: 16px">
+            Now at
+            <span style="margin-left: 3px; font-size: 22px">
+              {{
+                productData.price -
+                  (productData.price * productData.discountPercent) / 100
+                  | currency : "INR"
+              }}
+            </span>
+          </h2>
+        </div>
+        <div
+          style="display: flex; justify-content: flex-start; margin: 5px 0px"
+        >
+          <h1 style="margin: 0; font-size: 18px">
+            <span style="margin: 0; font-size: 35px; font-weight: 600">
+              {{ productData.discountPercent }}
+            </span>
+            % OFF
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <mat-card-actions style="justify-content: center">
+    <!-- <button
+      mat-icon-button
+      color="warn"
+      aria-label="Example icon button with a heart icon"
+    >
+      <mat-icon>favorite</mat-icon>
+    </button> -->
+    <!-- <button mat-raised-button class="button-properties">
+      add To wishlist <mat-icon>favorite</mat-icon>
+    </button> -->
+    <div class="addToButton" (click)="addItemToWishlist(productData._id)">
+      <button mat-mini-fab class="button-properties">
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <span class="title">add to wishlist</span>
+    </div>
+  </mat-card-actions>
+</mat-card>

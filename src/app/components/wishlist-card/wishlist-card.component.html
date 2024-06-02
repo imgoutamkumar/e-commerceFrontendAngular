@@ -1,0 +1,64 @@
+<mat-card class="example-card">
+  <div class="p-item">
+    <img class="p-img" mat-card-image [src]="wislistItem.product.images[0]" />
+    <div
+      class="col col-rows-3 details"
+      (click)="showProductDetails(wislistItem.product._id)"
+    >
+      <div style="padding: 20px">
+        <div class="row">
+          <h2 style="margin: 0; font-size: 18px">
+            {{ wislistItem.product.brand }}
+          </h2>
+        </div>
+        <div class="row">
+          <h3
+            style="
+              margin: 0;
+              font-size: 14px;
+              font-weight: 300;
+              line-height: 18px;
+            "
+          >
+            {{ wislistItem.product.title }}
+          </h3>
+        </div>
+        <div class="row">
+          <h2 style="margin: 0; font-size: 16px">
+            Now at
+            <span style="margin-left: 3px; font-size: 22px">
+              {{
+                wislistItem.product.price -
+                  (wislistItem.product.price *
+                    wislistItem.product.discountPercent) /
+                    100 | currency : "INR"
+              }}
+            </span>
+          </h2>
+        </div>
+        <div
+          style="display: flex; justify-content: flex-start; margin: 5px 0px"
+        >
+          <h1 style="margin: 0; font-size: 18px">
+            <span style="margin: 0; font-size: 35px; font-weight: 600">
+              {{ wislistItem.product.discountPercent }}
+            </span>
+            % OFF
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <mat-card-actions style="justify-content: center">
+    <div
+      class="removeButton"
+      (click)="removeWishlistedItem(wislistItem.product._id)"
+    >
+      <button mat-mini-fab class="button-properties">
+        <mat-icon>close</mat-icon>
+      </button>
+      <span class="title">remove from wishlist</span>
+    </div>
+  </mat-card-actions>
+</mat-card>

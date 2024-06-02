@@ -1,0 +1,197 @@
+<mat-card
+  style="
+    margin: 20px 40px;
+    height: 630px;
+    background-image: url('https://marketplace.canva.com/EAFxPynBReg/1/0/1600w/canva-green-beige-aesthetic-linktree-background-CJ76PCM9lBg.jpg');
+    background-size: cover;
+  "
+>
+  <mat-card-content style="display: flex">
+    <div class="productImagesLeft_container">
+      <!-- <div class="images">
+        <img
+          src="https://www.berrylush.com/cdn/shop/files/1_dc05f5f2-df5f-4e17-8483-cdded82037d9.jpg?v=1714649141&width=1500"
+          alt=""
+        />
+        <img
+          src="https://www.berrylush.com/cdn/shop/files/1_dc05f5f2-df5f-4e17-8483-cdded82037d9.jpg?v=1714649141&width=1500"
+          alt=""
+        />
+        <img
+          src="https://www.berrylush.com/cdn/shop/files/1_dc05f5f2-df5f-4e17-8483-cdded82037d9.jpg?v=1714649141&width=1500"
+          alt=""
+        />
+        <img
+          src="https://www.berrylush.com/cdn/shop/files/1_dc05f5f2-df5f-4e17-8483-cdded82037d9.jpg?v=1714649141&width=1500"
+          alt=""
+        />
+        <img
+          src="https://www.berrylush.com/cdn/shop/files/1_dc05f5f2-df5f-4e17-8483-cdded82037d9.jpg?v=1714649141&width=1500"
+          alt=""
+        />
+        <img
+          src="https://www.berrylush.com/cdn/shop/files/1_dc05f5f2-df5f-4e17-8483-cdded82037d9.jpg?v=1714649141&width=1500"
+          alt=""
+        />
+      </div> -->
+      <div class="productImage_container">
+        <div
+          class="slider_items"
+          *ngFor="let image of product?.images; let i = index"
+          [ngClass]="{
+          'selected': i===selectedIndex,
+          'previous': i===selectedIndex-1,
+          'next': i===selectedIndex+1,
+          'hideLeft': i<selectedIndex-1,
+          'hideRight': i>selectedIndex+1,
+        }"
+        >
+          <img
+            class="slider_image"
+            [src]="image"
+            (panright)="showPrevious(i)"
+            (panleft)="showNext(i)"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="productDetailsRight_container">
+      <div class="product-details">
+        <div style="display: flex; flex-direction: column">
+          <h2 style="color: black; font-size: 24px">{{ product?.brand }}</h2>
+          <h3 style="color: black; font-size: 20px; font-weight: 300">
+            {{ product?.title }}
+          </h3>
+        </div>
+        <div class="flex items-center space-x-5">
+          <p style="color: #1db954; font-size: 20px; font-weight: 600">
+            {{
+              product?.price - (product?.price * product?.discountPercent) / 100
+                | currency : "INR"
+            }}
+          </p>
+          <p class="text-gray-400 line-through">
+            {{ product?.price | currency : "INR" }}
+          </p>
+          <p class="text-red-600" style="font-size: 20px; font-weight: 600">
+            ({{ product?.discountPercent }}% OFF)
+          </p>
+        </div>
+        <div style="display: flex; align-items: center">
+          <label for="" style="color: black; font-size: 19px; font-weight: 500"
+            >Sizes
+          </label>
+          <mat-radio-group>
+            <mat-radio-button value="S">S</mat-radio-button>
+            <mat-radio-button value="M">M</mat-radio-button>
+            <mat-radio-button value="L">L</mat-radio-button>
+            <mat-radio-button value="XL">XL</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div
+          style="
+            height: 50px;
+            margin: 12px 0px;
+            display: flex;
+            padding-left: 20px;
+
+            align-items: center;
+            background: linear-gradient(to left, rgb(178 165 3 / 60%), #000000);
+          "
+        >
+          <p style="color: white; margin: 0; font-size: 18px; font-weight: 400">
+            We recommend
+            <span style="color: #ff004f; margin: 0px 5px; font-weight: bold">
+              M
+            </span>
+            for You
+          </p>
+        </div>
+        <div class="flex">
+          <button mat-fab extended class="add-to-cart-button">
+            Add to cart
+          </button>
+          <button
+            mat-fab
+            extended
+            class="add-to-wishlist-button"
+            (click)="addItemToWishlist()"
+          >
+            Add to wishlist
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<h2 style="margin: 30px 40px; font-size: 34px; font-weight: 300">
+  Product Description
+</h2>
+<mat-card style="margin: 20px 40px; background-color: #1c1c1c; padding: 10px">
+  <mat-card-content style="font-weight: 300; line-height: 22px">
+    <p style="font-size: 16px">
+      Celebrate the greatness of the Czech Republic Football Team with the Teams
+      Czech Republic Men's T-Shirt. Our Czech Republic tee is fashion made for
+      the true fanatic, matched with premium PUMA technology like dryCELL to
+      ensure that you feel as great as you look. DETAILS : Crew neck, All-over
+      print, PUMA branding, FACR Czech badge
+    </p>
+    <h2 style="font-size: 22px">Size & Fit</h2>
+    <p style="font-size: 16px">Slim fit</p>
+    <h2 style="font-size: 22px">Material & Care</h2>
+    <p>Polyester</p>
+    <p style="font-size: 16px">
+      Do Not Iron Inner Labels; Do Not Use Fabric Softener; Use Only Mild
+      Detergent; Wash And Iron Inside Out; Wash With Similar Colours
+    </p>
+    <h2 style="font-size: 22px">Specification</h2>
+    <div class="row">
+      <div class="col-4">
+        <div style="margin-bottom: 10px">
+          <h3 style="margin: 0; font-weight: 500">Fabric</h3>
+          <p style="margin: 0; font-size: 16px">Polyster</p>
+        </div>
+        <div style="margin-bottom: 10px">
+          <h3 style="margin: 0; font-weight: 500">Fit</h3>
+          <p style="margin: 0; font-size: 16px">Slim Fit</p>
+        </div>
+        <div style="margin-bottom: 10px">
+          <h3 style="margin: 0; font-weight: 500">Sleeve Styling</h3>
+          <p style="margin: 0; font-size: 16px">Regular Sleeves</p>
+        </div>
+      </div>
+      <div class="col-4">
+        <div style="margin-bottom: 10px">
+          <h3 style="margin: 0; font-weight: 500">Length</h3>
+          <p style="margin: 0; font-size: 16px">Regular</p>
+        </div>
+        <div style="margin-bottom: 10px">
+          <h3 style="margin: 0; font-weight: 500">Number of Item</h3>
+          <p style="margin: 0; font-size: 16px">1</p>
+        </div>
+        <div style="margin-bottom: 10px">
+          <h3 style="margin: 0; font-weight: 500">Pattern</h3>
+          <p style="margin: 0; font-size: 16px">Printed</p>
+        </div>
+      </div>
+      <div class="col-4">
+        <div style="margin-bottom: 10px">
+          <h3 style="margin: 0; font-weight: 500">Neck</h3>
+          <p style="margin: 0; font-size: 16px">Round Neck</p>
+        </div>
+        <div style="margin-bottom: 10px">
+          <h3 style="margin: 0; font-weight: 500">Occasion</h3>
+          <p style="margin: 0; font-size: 16px">Sports</p>
+        </div>
+        <div style="margin-bottom: 10px">
+          <h3 style="margin: 0; font-weight: 500">Wash Care</h3>
+          <p style="margin: 0; font-size: 16px">Machine Wash</p>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<h1 style="margin: 40px 40px; font-size: 38px; font-weight: 300">
+  Similar Products
+</h1>
+<!-- <app-product-slider></app-product-slider> -->

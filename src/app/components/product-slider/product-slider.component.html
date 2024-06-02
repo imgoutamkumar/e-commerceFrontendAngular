@@ -1,0 +1,18 @@
+<div class="product-slider">
+  <div class="product-slider-items">
+    <ng-container *ngFor="let product of Products">
+      <app-product-card
+        [productData]="product"
+        (data)="add($event)"
+      ></app-product-card>
+      <!-- <app-product-card></app-product-card>
+      <app-product-card></app-product-card>
+      <app-product-card></app-product-card>
+      <app-product-card></app-product-card>
+      <app-product-card></app-product-card>
+      <app-product-card></app-product-card>
+      <app-product-card></app-product-card>
+      <app-product-card></app-product-card> -->
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,178 @@
+<mat-toolbar class="nav-bar">
+  <!-- <button mat-icon-button class="example-icon">
+    <mat-icon>menu</mat-icon>
+  </button> -->
+  <a routerLink="/home">
+    <span
+      style="
+        margin-left: 20px;
+        font-weight: bold;
+        color: #ff004f;
+        font-family: Calligraffitti, cursive;
+        letter-spacing: 3px;
+        font-size: 25px;
+        font-weight: 600;
+      "
+      >Blake Market</span
+    >
+  </a>
+
+  <span class="example-spacer"></span>
+
+  <span
+    style="
+      margin-right: 25px;
+      background-color: #ff004f;
+      padding: 1px;
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+    "
+  >
+    <form [formGroup]="searchForm" (ngSubmit)="search()">
+      <input
+        style="
+          border-radius: 20px 0px 0px 20px;
+          height: 40px;
+          width: 400px;
+          padding: 0px 10px;
+          font-size: 14px;
+          color: black;
+        "
+        type="text"
+        placeholder="search..."
+        formControlName="search"
+      />
+      <button
+        style="
+          height: 40px;
+          border-radius: 0px 20px 20px 0px;
+          background-color: black;
+          font-size: 14px;
+          padding: 0px 12px;
+        "
+        type="submit"
+        [disabled]="!searchForm.valid"
+      >
+        Search
+      </button>
+    </form>
+  </span>
+  <button mat-button [matMenuTriggerFor]="category" class="nav-bar-item">
+    Category
+  </button>
+  <a routerLink="/order">
+    <button mat-button class="nav-bar-item">Orders</button>
+  </a>
+
+  <a routerLink="/wishlist">
+    <button mat-button class="nav-bar-item">
+      <div matBadge="1" matBadgeSize="small">Wishlist</div>
+    </button>
+  </a>
+
+  <!-- <a routerLink="/cart">
+    <button mat-button class="nav-bar-item">
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+  </a> -->
+  <a routerLink="/cart">
+    <div
+      class="nav-bar-item"
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 25px;
+      "
+      matBadgeSize="small"
+      matBadge="15"
+      matBadgeColor="warn"
+    >
+      <mat-icon mat-fab>shopping_cart</mat-icon>
+    </div>
+  </a>
+
+  @if (loggedIn) {
+  <div class="profile-icon" [matMenuTriggerFor]="profileMenu">
+    <img
+      src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      class="profile-icon-image"
+    />
+  </div>
+  }@else {
+  <button
+    mat-fab
+    extended
+    class="signIn-button"
+    (click)="openLoginFormDialog()"
+  >
+    SignIn
+  </button>
+  }
+</mat-toolbar>
+
+<mat-menu #profileMenu="matMenu">
+  <button mat-menu-item>Update Profile</button>
+  <a routerLink="/wishlist">
+    <button mat-menu-item>Wishlist</button>
+  </a>
+  <a routerLink="/order">
+    <button mat-menu-item>Orders</button>
+  </a>
+
+  <button mat-menu-item (click)="logOut()">Log Out</button>
+</mat-menu>
+
+<mat-menu #category="matMenu">
+  <button mat-menu-item [matMenuTriggerFor]="mens">Men</button>
+  <button mat-menu-item [matMenuTriggerFor]="womens">Women</button>
+  <button mat-menu-item [matMenuTriggerFor]="kids">Kids</button>
+</mat-menu>
+
+<mat-menu #mens="matMenu">
+  <button mat-menu-item [matMenuTriggerFor]="topWear">Top Wear</button>
+  <button mat-menu-item [matMenuTriggerFor]="bottomWear">Bottom Wear</button>
+  <button mat-menu-item [matMenuTriggerFor]="casualWear">Casual Wear</button>
+  <button mat-menu-item>Sleep Wear</button>
+  <button mat-menu-item>Sports Wear</button>
+</mat-menu>
+
+<mat-menu #womens="matMenu">
+  <button mat-menu-item [matMenuTriggerFor]="topWear">Top Wear</button>
+  <button mat-menu-item [matMenuTriggerFor]="bottomWear">Bottom Wear</button>
+  <button mat-menu-item [matMenuTriggerFor]="casualWear">Casual Wear</button>
+  <button mat-menu-item>Sleep Wear</button>
+  <button mat-menu-item>Sports Wear</button>
+</mat-menu>
+
+<mat-menu #kids="matMenu">
+  <button mat-menu-item>t shirt</button>
+  <button mat-menu-item>shirt</button>
+  <button mat-menu-item>vest</button>
+  <button mat-menu-item>Sweat shirt</button>
+  <button mat-menu-item>jacket</button>
+</mat-menu>
+
+<mat-menu #topWear="matMenu">
+  <button mat-menu-item>t shirt</button>
+  <button mat-menu-item>shirt</button>
+  <button mat-menu-item>vest</button>
+  <button mat-menu-item>Sweat shirt</button>
+  <button mat-menu-item>jacket</button>
+</mat-menu>
+
+<mat-menu #bottomWear="matMenu">
+  <button mat-menu-item>Sonoran desert toad</button>
+  <button mat-menu-item>Western toad</button>
+  <button mat-menu-item>Arroyo toad</button>
+  <button mat-menu-item>Yosemite toad</button>
+</mat-menu>
+
+<mat-menu #casualWear="matMenu">
+  <button mat-menu-item>Banded Day Gecko</button>
+  <button mat-menu-item>Banded Gila Monster</button>
+  <button mat-menu-item>Black Tree Monitor</button>
+  <button mat-menu-item>Blue Spiny Lizard</button>
+  <button mat-menu-item disabled>Velociraptor</button>
+</mat-menu>

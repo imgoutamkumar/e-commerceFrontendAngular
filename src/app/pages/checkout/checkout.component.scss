@@ -1,0 +1,31 @@
+.row {
+  margin: 0px;
+  mat-card {
+    background-color: #1b1919;
+    margin: 20px 20px 20px;
+    mat-card-content {
+      div {
+        h2 {
+        }
+        h3 {
+          margin: 0px;
+        }
+      }
+    }
+    mat-card-actions {
+      .delivery-button {
+        width: 200px;
+        height: 34px;
+        background-color: white;
+        color: #1db954;
+        border-radius: 17px;
+        font-weight: 500;
+        margin: 10px;
+      }
+      .delivery-button:hover {
+        background-color: #1db954;
+        color: white;
+      }
+    }
+  }
+}
