@@ -73,5 +73,13 @@ export class HomeComponent implements OnInit, OnChanges {
     });
   } */
 
-  categories = ['Men', 'Women', 'Kids'];
+  brands = [
+    'Nike',
+    'Adidas',
+    'Puma',
+    'Zara',
+    'Levis',
+    'Peter England',
+    'Jockey',
+  ];
 }

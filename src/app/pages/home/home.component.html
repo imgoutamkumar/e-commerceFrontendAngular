@@ -12,10 +12,10 @@
   Biggest Deals on Top Brands
 </h1>
 <div>
-  <swiper-container navigation="true" slides-per-view="2" loop="false">
-    <ng-container *ngFor="let category of categories">
+  <swiper-container navigation="true" slides-per-view="6" loop="false">
+    <ng-container *ngFor="let brand of brands">
       <swiper-slide style="display: flex; justify-content: center"
-        ><app-category-card [categoryData]="category"></app-category-card>
+        ><app-category-card [brandData]="brand"></app-category-card>
       </swiper-slide>
     </ng-container>
   </swiper-container>

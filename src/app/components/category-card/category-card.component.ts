@@ -11,9 +11,10 @@ import { CommonService } from '../../services/common.service';
 })
 export class CategoryCardComponent {
   constructor() {}
-  @Input() categoryData: any;
+  @Input() brandData: any;
 
   getData(e: Event) {
     console.log('button clicked');
+    console.log(e);
   }
 }
