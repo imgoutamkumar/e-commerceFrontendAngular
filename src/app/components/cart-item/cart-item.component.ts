@@ -23,4 +23,12 @@ export class CartItemComponent {
   getProductDetails(id: any) {
     this.router.navigate(['/productDetail/', id]);
   }
+  quantity(value: string) {
+    if (this.cartItemsData.quantity > 1 && value == 'decrease') {
+      this.cartItemsData.quantity -= 1;
+    }
+    if (this.cartItemsData.quantity < 5 && value == 'increase') {
+      this.cartItemsData.quantity += 1;
+    }
+  }
 }

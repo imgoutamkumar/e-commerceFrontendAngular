@@ -1,10 +1,45 @@
 .allProductMainContainer {
+  mat-card {
+    background-color: rgb(50, 50, 50);
+    color: white;
+    mat-card-content {
+      section {
+        color: white;
+        mat-checkbox {
+          p {
+            margin: 0px;
+            color: white;
+          }
+
+          .mdc-checkbox {
+            .mdc-checkbox__background {
+              border-color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .brands::-webkit-scrollbar {
+    width: 6px;
+  }
+  .brands::-webkit-scrollbar-thumb {
+    background: #cb275b;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  .brands::-webkit-scrollbar-thumb:hover {
+    background-color: #ff004f;
+  }
+
   .productsContainer {
+    border-left: 1px solid #ffffff94;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     bottom: 100px;
     gap: 20px;
-    padding: 25px 30px 25px 0px;
+    padding: 0px 30px 25px 0px;
   }
 }

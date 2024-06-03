@@ -93,20 +93,30 @@ export class CartComponent implements OnInit {
   };
 
   cartCheckOutData = {
-    amount: 50000,
+    amount: 0,
   };
   pay() {
     this.paymentService.createOrder(this.cartCheckOutData).subscribe({
       next: (result: any) => {
         console.log('payment result : ', result);
-        this.options.amount = parseInt(result.amount);
+        this.options.amount = parseFloat(result.amount);
         this.options.order_id = result.id;
+        console.log('result.amount:', result.amount);
+        console.log('type of result.amount:', typeof result.amount);
+        console.log('this.options.amount :', this.options.amount);
+        console.log(
+          'type of this.options.amount :',
+          typeof this.options.amount
+        );
+        var rzp1 = new Razorpay(this.options);
+        rzp1.open();
       },
       error: (error: any) => {
+        alert('something went wrong');
         console.log(error);
       },
     });
-    const rzp1 = new Razorpay(this.options);
-    rzp1.open();
+    //const rzp1 = new Razorpay(this.options);
+    //rzp1.open();
   }
 }

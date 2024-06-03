@@ -16,9 +16,13 @@
       <div class="col-9" style="padding-left: 0">
         <mat-card-header>
           <div class="block">
-            <mat-card-title style="font-weight: 300; font-size: 18px">{{
-              cartItemsData.product.title
-            }}</mat-card-title>
+            <mat-card-title style="font-weight: 300; font-size: 18px">
+              <div
+                style="height: 30px; overflow: hidden; text-overflow: ellipsis"
+              >
+                {{ cartItemsData.product.title }}
+              </div>
+            </mat-card-title>
             <mat-card-subtitle
               style="color: white; font-size: 15px; font-weight: 500"
               >{{ cartItemsData.product.brand }}</mat-card-subtitle
@@ -34,8 +38,8 @@
             </div>
             <div class="flex gap-2">
               <h3
-                class="text-gray-400 ; margin: 0"
-                style="text-decoration: line-through"
+                class="text-gray-400 ;"
+                style="text-decoration: line-through; margin: 0px"
               >
                 {{ cartItemsData.product.price | currency : "INR" }}
               </h3>
@@ -43,7 +47,7 @@
                 style="
                   font-size: 22px;
                   font-weight: 400;
-                  margin: 0;
+                  margin: 0px;
                   color: rgb(7, 214, 7);
                 "
               >
@@ -54,7 +58,7 @@
                       100 | currency : "INR"
                 }}
               </h3>
-              <h3 style="color: white; font-size: 14px; margin: 0">
+              <h3 style="color: white; font-size: 14px; margin: 0px">
                 ({{ cartItemsData.product.discountPercent }}% OFF)
               </h3>
             </div>
@@ -70,6 +74,7 @@
               width: 27px;
               background-color: rgba(255, 0, 0, 0.5);
             "
+            (click)="quantity('decrease')"
           >
             <mat-icon
               style="
@@ -81,7 +86,9 @@
               >remove</mat-icon
             >
           </button>
-          <p style="margin: 0px 5px; padding: 0px 5px 0px">10</p>
+          <p style="margin: 0px 5px; padding: 0px 5px 0px">
+            {{ cartItemsData.quantity }}
+          </p>
           <button
             mat-mini-fab
             matTooltip="accent"
@@ -91,6 +98,7 @@
               width: 27px;
               background-color: rgba(7, 203, 7, 0.5);
             "
+            (click)="quantity('increase')"
           >
             <mat-icon
               style="

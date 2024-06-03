@@ -14,7 +14,97 @@
 </mat-toolbar> -->
 <div class="allProductMainContainer">
   <div class="row">
-    <div class="col-2"></div>
+    <div class="col-2" style="padding: 0px">
+      <div
+        style="
+          margin-left: 25px;
+          display: flex;
+          flex-direction: column;
+          row-gap: 10px;
+        "
+      >
+        <mat-card style="width: 100%">
+          <mat-card-content>
+            <section class="example-section" [formGroup]="toppings">
+              <h4>Select category:</h4>
+              <div style="display: flex; flex-direction: column">
+                <mat-checkbox formControlName="men">
+                  <p>Men</p>
+                </mat-checkbox>
+
+                <mat-checkbox formControlName="women">
+                  <p>Women</p>
+                </mat-checkbox>
+
+                <mat-checkbox formControlName="kids">
+                  <p>Kids</p>
+                </mat-checkbox>
+              </div>
+            </section>
+          </mat-card-content>
+        </mat-card>
+        <mat-card style="width: 100%">
+          <mat-card-header>
+            <h4>Brands:</h4>
+          </mat-card-header>
+
+          <mat-card-content
+            class="brands"
+            style="height: 300px; overflow-y: scroll"
+          >
+            <section class="example-section">
+              <div style="display: flex; flex-wrap: wrap">
+                <mat-checkbox>
+                  <p>Nike</p>
+                </mat-checkbox>
+                <mat-checkbox>
+                  <p>adidas</p>
+                </mat-checkbox>
+                <mat-checkbox>
+                  <p>Puma</p>
+                </mat-checkbox>
+                <mat-checkbox>
+                  <p>Levis</p>
+                </mat-checkbox>
+                <mat-checkbox>
+                  <p>Zara</p>
+                </mat-checkbox>
+                <mat-checkbox>
+                  <p>Nike</p>
+                </mat-checkbox>
+                <mat-checkbox>
+                  <p>adidas</p>
+                </mat-checkbox>
+                <mat-checkbox>
+                  <p>Puma</p>
+                </mat-checkbox>
+                <mat-checkbox>
+                  <p>Levis</p>
+                </mat-checkbox>
+                <mat-checkbox>
+                  <p>Zara</p>
+                </mat-checkbox>
+                <mat-checkbox>
+                  <p>Nike</p>
+                </mat-checkbox>
+                <mat-checkbox>
+                  <p>adidas</p>
+                </mat-checkbox>
+                <mat-checkbox>
+                  <p>Puma</p>
+                </mat-checkbox>
+                <mat-checkbox>
+                  <p>Levis</p>
+                </mat-checkbox>
+                <mat-checkbox>
+                  <p>Zara</p>
+                </mat-checkbox>
+              </div>
+            </section>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
     <div class="col-10">
       <div class="productsContainer">
         <ng-container
