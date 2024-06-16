@@ -2,6 +2,8 @@
   style="
     margin: 20px 40px;
     height: 630px;
+    background-color: rgb(40 40 40);
+    background-blend-mode: color-burn;
     background-image: url('https://marketplace.canva.com/EAFxPynBReg/1/0/1600w/canva-green-beige-aesthetic-linktree-background-CJ76PCM9lBg.jpg');
     background-size: cover;
   "
@@ -58,8 +60,8 @@
     <div class="productDetailsRight_container">
       <div class="product-details">
         <div style="display: flex; flex-direction: column">
-          <h2 style="color: black; font-size: 24px">{{ product?.brand }}</h2>
-          <h3 style="color: black; font-size: 20px; font-weight: 300">
+          <h2 style="font-size: 24px">{{ product?.brand }}</h2>
+          <h3 style="font-size: 20px; font-weight: 300">
             {{ product?.title }}
           </h3>
         </div>
@@ -78,14 +80,22 @@
           </p>
         </div>
         <div style="display: flex; align-items: center">
-          <label for="" style="color: black; font-size: 19px; font-weight: 500"
-            >Sizes
+          <label for="" style="font-size: 20px; font-weight: 400"
+            >Sizes :
           </label>
-          <mat-radio-group>
-            <mat-radio-button value="S">S</mat-radio-button>
-            <mat-radio-button value="M">M</mat-radio-button>
-            <mat-radio-button value="L">L</mat-radio-button>
-            <mat-radio-button value="XL">XL</mat-radio-button>
+          <mat-radio-group style="gap: 10px">
+            <mat-radio-button value="S"
+              ><h2 style="margin: 0; color: white">S</h2>
+            </mat-radio-button>
+            <mat-radio-button value="M"
+              ><h2 style="margin: 0; color: white">M</h2></mat-radio-button
+            >
+            <mat-radio-button value="L"
+              ><h2 style="margin: 0; color: white">L</h2></mat-radio-button
+            >
+            <mat-radio-button value="XL"
+              ><h2 style="margin: 0; color: white">XL</h2></mat-radio-button
+            >
           </mat-radio-group>
         </div>
         <div
@@ -108,11 +118,11 @@
           </p>
         </div>
         <div class="flex">
-          <button mat-fab extended class="add-to-cart-button">
+          <button mat-raised-button extended class="add-to-cart-button">
             Add to cart
           </button>
           <button
-            mat-fab
+            mat-raised-button
             extended
             class="add-to-wishlist-button"
             (click)="addItemToWishlist()"
@@ -194,4 +204,14 @@
 <h1 style="margin: 40px 40px; font-size: 38px; font-weight: 300">
   Similar Products
 </h1>
+<div style="width: 100%; padding: 0px 70px">
+  <swiper-container navigation="true" slides-per-view="5" loop="false">
+    <ng-container *ngFor="let product of womensTrendingProduct">
+      <swiper-slide style="display: flex; justify-content: center">
+        <app-product-card [productData]="product"></app-product-card>
+      </swiper-slide>
+    </ng-container>
+  </swiper-container>
+</div>
+
 <!-- <app-product-slider></app-product-slider> -->

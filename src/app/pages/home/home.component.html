@@ -1,4 +1,5 @@
 <app-main-carousel></app-main-carousel>
+
 <!-- <div style="display: flex">
   <span
     ><h1 style="margin: 40px 40px; font-size: 38px; font-weight: 300">
@@ -6,9 +7,9 @@
     </h1></span
   >
 </div>
-
 <app-product-slider [Products]="womensTrendingProduct"></app-product-slider> -->
-<h1 style="margin: 40px 40px; font-size: 38px; font-weight: 300">
+
+<!-- <h1 style="margin: 40px 40px; font-size: 38px; font-weight: 300">
   Biggest Deals on Top Brands
 </h1>
 <div>
@@ -19,33 +20,90 @@
       </swiper-slide>
     </ng-container>
   </swiper-container>
-</div>
+</div> -->
+
+<div style="height: 80px"></div>
+
+<mat-grid-list cols="4" rowHeight="100px">
+  @for (tile of womensOffer; track tile) {
+  <div (click)="getOfferProducts(tile)">
+    <mat-grid-tile
+      [colspan]="tile.cols"
+      [rowspan]="tile.rows"
+      [style.background]="tile.color"
+      ><img
+        [src]="tile.text"
+        style="object-fit: cover; height: 100%; width: 100%"
+    /></mat-grid-tile>
+  </div>
+  }
+</mat-grid-list>
 
 <h1 style="margin: 40px 40px; font-size: 38px; font-weight: 300">
   Trending Womens Clothing
 </h1>
+
 <!-- <app-product-slider
   [Products]="womensTrendingProduct"
   (productId)="addToWishlist($event)"
 ></app-product-slider> -->
-<swiper-container navigation="true" slides-per-view="6" loop="false">
+<!-- <swiper-container navigation="true" slides-per-view="6" loop="false">
   <ng-container *ngFor="let product of womensTrendingProduct">
     <swiper-slide style="display: flex; justify-content: center">
       <app-product-card [productData]="product"></app-product-card>
     </swiper-slide>
   </ng-container>
-</swiper-container>
+</swiper-container> -->
+
+<div
+  class="swiper_main_container"
+  style="width: 100%; display: flex; justify-content: center"
+>
+  <div style="width: 80%">
+    <swiper-container navigation="true" slides-per-view="5" loop="false">
+      <ng-container *ngFor="let product of womensTrendingProduct">
+        <swiper-slide style="display: flex; justify-content: center">
+          <app-product-card [productData]="product"></app-product-card>
+        </swiper-slide>
+      </ng-container>
+    </swiper-container>
+  </div>
+</div>
+
+<div style="height: 80px"></div>
+
+<mat-grid-list cols="4" rowHeight="100px">
+  @for (tile of mensOffer; track tile) {
+  <mat-grid-tile
+    [colspan]="tile.cols"
+    [rowspan]="tile.rows"
+    [style.background]="tile.color"
+    ><img
+      [src]="tile.text"
+      style="object-fit: cover; height: 100%; width: 100%"
+  /></mat-grid-tile>
+  }
+</mat-grid-list>
+
 <h1 style="margin: 40px 40px; font-size: 38px; font-weight: 300">
   Trending Mens Clothing
 </h1>
+
 <!-- <app-product-slider
   [Products]="mensTrendingProduct"
   (productId)="addToWishlist($event)"
 ></app-product-slider> -->
-<swiper-container navigation="true" slides-per-view="6" loop="false">
-  <ng-container *ngFor="let product of mensTrendingProduct">
-    <swiper-slide style="display: flex; justify-content: center">
-      <app-product-card [productData]="product"></app-product-card>
-    </swiper-slide>
-  </ng-container>
-</swiper-container>
+<div
+  class="swiper_main_container"
+  style="width: 100%; display: flex; justify-content: center"
+>
+  <div style="width: 80%">
+    <swiper-container navigation="true" slides-per-view="5" loop="false">
+      <ng-container *ngFor="let product of mensTrendingProduct">
+        <swiper-slide style="display: flex; justify-content: center">
+          <app-product-card [productData]="product"></app-product-card>
+        </swiper-slide>
+      </ng-container>
+    </swiper-container>
+  </div>
+</div>

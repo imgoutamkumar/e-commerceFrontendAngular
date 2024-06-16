@@ -7,12 +7,24 @@ import { Observable } from 'rxjs';
 })
 export class CartService {
   constructor(private http: HttpClient) {}
-
+  baseUrl = 'http://localhost:5454';
   getUSerCart(): Observable<any> {
     let headers = new HttpHeaders().set(
       'Authorization',
       `bearer ${localStorage.getItem('token')}`
     );
-    return this.http.get<any>(`http://localhost:5454/api/cart/`, { headers });
+    return this.http.get<any>(`${this.baseUrl}/api/cart/`, { headers });
+  }
+
+  removeItemFromCart(productId: string) {
+    let headers = new HttpHeaders().set(
+      'Authorization',
+      `bearer ${localStorage.getItem('token')}`
+    );
+    return this.http.delete<any>(
+      `${this.baseUrl}/api/cart/remove/${productId}`,
+
+      { headers }
+    );
   }
 }

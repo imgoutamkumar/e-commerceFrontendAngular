@@ -14,7 +14,6 @@ export class CategoryCardComponent {
   @Input() brandData: any;
 
   getData(e: Event) {
-    console.log('button clicked');
     console.log(e);
   }
 }

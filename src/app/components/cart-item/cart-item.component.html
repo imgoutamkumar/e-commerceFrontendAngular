@@ -111,7 +111,10 @@
             >
           </button>
           <span class="example-spacer"></span>
-          <div class="removeButton">
+          <div
+            class="removeButton"
+            (click)="removeCartItem(cartItemsData.product._id)"
+          >
             <button mat-mini-fab class="button-properties" color="warn">
               <mat-icon
                 style="

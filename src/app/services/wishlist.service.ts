@@ -7,14 +7,14 @@ import { Observable } from 'rxjs';
 })
 export class WishlistService {
   constructor(private http: HttpClient) {}
-
+  baseUrl = 'http://localhost:5454';
   getWishlist(): Observable<any> {
     let headers = new HttpHeaders().set(
       'Authorization',
       `bearer ${localStorage.getItem('token')}`
     );
 
-    return this.http.get<any>(`http://localhost:5454/api/wishlist/`, {
+    return this.http.get<any>(`${this.baseUrl}/api/wishlist/`, {
       headers,
     });
   }
@@ -31,7 +31,7 @@ export class WishlistService {
     );
 
     return this.http.post<any>(
-      `http://localhost:5454/api/wishlist/add`,
+      `${this.baseUrl}/api/wishlist/add`,
       this.product,
       { headers }
     );
@@ -42,7 +42,7 @@ export class WishlistService {
       `bearer ${localStorage.getItem('token')}`
     );
     return this.http.delete<any>(
-      `http://localhost:5454/api/wishlist/remove/${productId}`,
+      `${this.baseUrl}/api/wishlist/remove/${productId}`,
 
       { headers }
     );

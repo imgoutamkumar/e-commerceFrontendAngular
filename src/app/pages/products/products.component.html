@@ -25,79 +25,78 @@
       >
         <mat-card style="width: 100%">
           <mat-card-content>
-            <section class="example-section" [formGroup]="toppings">
-              <h4>Select category:</h4>
-              <div style="display: flex; flex-direction: column">
-                <mat-checkbox formControlName="men">
-                  <p>Men</p>
-                </mat-checkbox>
-
-                <mat-checkbox formControlName="women">
-                  <p>Women</p>
-                </mat-checkbox>
-
-                <mat-checkbox formControlName="kids">
-                  <p>Kids</p>
-                </mat-checkbox>
-              </div>
+            <section class="example-section">
+              <h4 style="font-weight: 500">Select category:</h4>
+              <mat-radio-group class="example-radio-group" [(ngModel)]="cat">
+                <div style="display: flex; flex-direction: column">
+                  @for (category of categories; track category ) {
+                  <mat-radio-button
+                    class="example-radio-button"
+                    [value]="category"
+                    (change)="onChange(category)"
+                    ><h3
+                      style="
+                        margin: 0;
+                        color: rgb(211, 211, 211);
+                        font-size: 14px;
+                      "
+                    >
+                      {{ category }}
+                    </h3></mat-radio-button
+                  >
+                  }
+                </div>
+              </mat-radio-group>
             </section>
           </mat-card-content>
         </mat-card>
         <mat-card style="width: 100%">
           <mat-card-header>
-            <h4>Brands:</h4>
+            <h4 style="font-weight: 500">Brands:</h4>
           </mat-card-header>
 
           <mat-card-content
             class="brands"
-            style="height: 300px; overflow-y: scroll"
+            style="height: 300px; overflow-y: scroll; padding: 0px 8px"
           >
             <section class="example-section">
               <div style="display: flex; flex-wrap: wrap">
+                <div *ngFor="let brand of brands; let i = index">
+                  <mat-checkbox
+                    [value]="brand"
+                    (change)="onCheckboxChange($event)"
+                  >
+                    <p
+                      style="
+                        color: rgb(211, 211, 211);
+                        font-size: 12px;
+                        text-transform: lowercase;
+                      "
+                    >
+                      {{ brand }}
+                    </p>
+                  </mat-checkbox>
+                </div>
+              </div>
+            </section>
+          </mat-card-content>
+        </mat-card>
+        <mat-card style="width: 100%">
+          <mat-card-content>
+            <section class="example-section">
+              <h4 style="font-weight: 500">Price Range:</h4>
+              <div style="display: flex; flex-direction: column">
                 <mat-checkbox>
-                  <p>Nike</p>
+                  <p style="color: rgb(211, 211, 211)">less then 1000</p>
                 </mat-checkbox>
                 <mat-checkbox>
-                  <p>adidas</p>
+                  <p style="color: rgb(211, 211, 211)">1000 to 2500</p>
                 </mat-checkbox>
                 <mat-checkbox>
-                  <p>Puma</p>
+                  <p style="color: rgb(211, 211, 211)">2500 to 5000</p>
                 </mat-checkbox>
                 <mat-checkbox>
-                  <p>Levis</p>
-                </mat-checkbox>
-                <mat-checkbox>
-                  <p>Zara</p>
-                </mat-checkbox>
-                <mat-checkbox>
-                  <p>Nike</p>
-                </mat-checkbox>
-                <mat-checkbox>
-                  <p>adidas</p>
-                </mat-checkbox>
-                <mat-checkbox>
-                  <p>Puma</p>
-                </mat-checkbox>
-                <mat-checkbox>
-                  <p>Levis</p>
-                </mat-checkbox>
-                <mat-checkbox>
-                  <p>Zara</p>
-                </mat-checkbox>
-                <mat-checkbox>
-                  <p>Nike</p>
-                </mat-checkbox>
-                <mat-checkbox>
-                  <p>adidas</p>
-                </mat-checkbox>
-                <mat-checkbox>
-                  <p>Puma</p>
-                </mat-checkbox>
-                <mat-checkbox>
-                  <p>Levis</p>
-                </mat-checkbox>
-                <mat-checkbox>
-                  <p>Zara</p>
+                  <p style="color: rgb(211, 211, 211)">5000 and above</p>
                 </mat-checkbox>
               </div>
             </section>
@@ -106,13 +105,21 @@
       </div>
     </div>
     <div class="col-10">
-      <div class="productsContainer">
-        <ng-container
-          *ngFor="let product of searchedAndFilteredProducts?.product"
-        >
-          <app-product-card [productData]="product"></app-product-card>
-        </ng-container>
-      </div>
+      <section style="min-height: 700px">
+        <div class="productsContainer">
+          <ng-container *ngFor="let product of searchedAndFilteredProducts">
+            <app-product-card [productData]="product"></app-product-card>
+          </ng-container>
+        </div>
+      </section>
+      <ngb-pagination
+        class="d-flex justify-content-center"
+        [collectionSize]="totalPage"
+        [(page)]="page"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+      />
     </div>
   </div>
 </div>

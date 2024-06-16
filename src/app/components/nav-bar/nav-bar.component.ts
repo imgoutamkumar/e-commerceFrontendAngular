@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,6 +9,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LoginFormComponent } from '../login-form/login-form.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { AuthService } from '../../services/auth.service';
+
 import {
   FormBuilder,
   FormGroup,
@@ -17,6 +18,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonService } from '../../services/common.service';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -35,21 +37,39 @@ import { CommonService } from '../../services/common.service';
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.scss',
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent implements OnInit, AfterViewInit {
   searchForm: FormGroup;
   constructor(
     public dialog: MatDialog,
     private route: Router,
     private authService: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private productService: ProductService
   ) {
     this.searchForm = this.fb.group({
       search: ['', Validators.required],
     });
   }
+  ngAfterViewInit(): void {
+    console.log('afterViewInit called');
+  }
+
   ngOnInit(): void {
     this.isLoggedIn();
+    // this.getCategoryData();
   }
+
+  /* catData: string = '';
+  getCategoryData() {
+    this.productService.getCategoryData().subscribe({
+      next: (value: any) => {
+        this.catData = value;
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
+    });
+  } */
 
   openLoginFormDialog(): void {
     this.dialog.open(LoginFormComponent, { panelClass: 'my-custom-dialog' });
@@ -67,10 +87,13 @@ export class NavBarComponent implements OnInit {
     this.isLoggedIn();
     this.route.navigate(['home']);
   }
+
   search() {
-    console.log(this.searchForm.value.search);
     this.route.navigate(['products'], {
-      queryParams: { search: this.searchForm.value.search },
+      queryParams: {
+        search: this.searchForm.value.search,
+        // category: this.catData,
+      },
     });
   }
 }

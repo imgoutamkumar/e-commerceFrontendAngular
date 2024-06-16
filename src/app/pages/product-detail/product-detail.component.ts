@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ProductSliderComponent } from '../../components/product-slider/product-slider.component';
@@ -12,6 +12,7 @@ import { ProductService } from '../../services/product.service';
 import { WishlistService } from '../../services/wishlist.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBarComponent } from '../../components/snack-bar/snack-bar.component';
+import { ProductCardComponent } from '../../components/product-card/product-card.component';
 @Component({
   selector: 'app-product-detail',
   standalone: true,
@@ -25,7 +26,9 @@ import { SnackBarComponent } from '../../components/snack-bar/snack-bar.componen
     MatButtonModule,
     MatCardModule,
     HammerModule,
+    ProductCardComponent,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ProductDetailComponent implements OnInit {
   constructor(
@@ -37,6 +40,7 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProductDetails();
+    this.getWomenTrendingProduct();
   }
 
   openSnackBar() {
@@ -97,5 +101,18 @@ export class ProductDetailComponent implements OnInit {
     if (this.selectedIndex < this.product.images?.length - 1) {
       this.selectedIndex = i + 1;
     }
+  }
+
+  womensTrendingProduct: any;
+
+  getWomenTrendingProduct() {
+    this.productService.getProductFromCategory('Women').subscribe({
+      next: (result: any) => {
+        this.womensTrendingProduct = result;
+      },
+      error: (error: any) => {
+        console.log('error', error);
+      },
+    });
   }
 }

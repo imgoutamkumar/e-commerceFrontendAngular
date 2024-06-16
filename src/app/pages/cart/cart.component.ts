@@ -76,12 +76,12 @@ export class CartComponent implements OnInit {
     currency: 'INR',
     name: 'Blake Market',
     description: 'Test Transaction',
-    image: 'https://example.com/your_logo',
+    image: `https://example.com/your_logo`,
     order_id: '', //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-    callback_url: 'https://eneqd3r9zrjok.x.pipedream.net/',
+    callback_url: `http://localhost:5454/api/payment/verify`,
     prefill: {
-      name: 'Gaurav Kumar',
-      email: 'gaurav.kumar@example.com',
+      name: 'Goutam Kumar',
+      email: 'goutam@example.com',
       contact: '9000090000',
     },
     notes: {

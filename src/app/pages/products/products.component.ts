@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,9 +9,14 @@ import { CommonModule } from '@angular/common';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
 import { ProductService } from '../../services/product.service';
 import { WishlistService } from '../../services/wishlist.service';
-import { ActivatedRoute } from '@angular/router';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ActivatedRoute, withComponentInputBinding } from '@angular/router';
+import {
+  MatCheckboxChange,
+  MatCheckboxModule,
+} from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
+import { MatRadioModule } from '@angular/material/radio';
+import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-products',
   standalone: true,
@@ -27,11 +32,13 @@ import { MatCardModule } from '@angular/material/card';
     MatCheckboxModule,
     MatCardModule,
     ReactiveFormsModule,
+    MatRadioModule,
+    NgbPaginationModule,
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnChanges {
   constructor(
     private productService: ProductService,
     private wishlistService: WishlistService,
@@ -39,32 +46,86 @@ export class ProductsComponent implements OnInit {
     private fb: FormBuilder
   ) {}
 
-  toppings = this.fb.group({
-    men: false,
-    women: false,
-    kids: false,
-  });
+  page = 1;
+  totalPage: any;
+  categories: string[] = ['Men', 'Women', 'Girls', 'Boys'];
+  brands: string[] = [
+    'Biba',
+    'Amrutam Fab',
+    'Anouk',
+    'KALINI',
+    'Berrylush',
+    'BULLMER',
+    'Miss Chase',
+    'The Souled Store',
+    'Roadster',
+    'Louis Philippe',
+    'Raymond',
+    'Mast & Harbour',
+    'HIGHLANDER',
+    'HERE&NOW',
+    'Manyavar Mohey',
+    'Urbanic',
+    'adidas',
+    'KISAH',
+    'Sangria',
+    'Chemistry',
+    'Tokyo Talkies',
+    'urbanic',
+    'House of Pataudi',
+    'SASSAFRAS',
+    'Khushal K',
+    'ASPORA',
+  ];
 
   ngOnInit(): void {
     this.getMenTrendingProduct();
     this.getSearchedAndFilteredData();
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('onchange called');
+  }
   queryData = {
     search: '',
-    page: '',
+    page: 1,
     category: '',
     limit: '',
+    brand: '',
   };
+  cat: string = '';
+  onChange(cat: string) {
+    this.cat = cat;
+    //this.productService.setCategoryData(cat);
+    this.getSearchedAndFilteredData();
+  }
+  selectedCheckBoxValue: any;
+  selectedCheckBoxSet = new Set();
+  onCheckboxChange(checkbox: MatCheckboxChange) {
+    if (checkbox.checked === true) {
+      this.selectedCheckBoxSet.add(checkbox.source.value);
+    }
+    if (checkbox.checked === false) {
+      this.selectedCheckBoxSet.delete(checkbox.source.value);
+    }
+    console.log(this.selectedCheckBoxSet);
+    this.getSearchedAndFilteredData();
+  }
+
   searchedAndFilteredProducts: any;
   getSearchedAndFilteredData() {
     this.activatedRoute.queryParams.subscribe({
       next: (value: any) => {
-        console.log('search :', value.search);
+        this.selectedCheckBoxValue = [...this.selectedCheckBoxSet];
+        console.log('queryValue', value);
         this.queryData.search = value.search;
+        this.queryData.category = this.cat;
+        this.queryData.brand = this.selectedCheckBoxValue;
+        this.queryData.page = this.page;
         this.productService.searchAndFilteredProduct(this.queryData).subscribe({
           next: (result: any) => {
-            console.log('search result:', result);
-            this.searchedAndFilteredProducts = result;
+            console.log(result);
+            this.totalPage = result.productCount * 10;
+            this.searchedAndFilteredProducts = result.products;
           },
           error: (error: any) => {
             console.log(error);

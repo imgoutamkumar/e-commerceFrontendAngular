@@ -7,13 +7,14 @@ import { Observable } from 'rxjs';
 })
 export class PaymentService {
   constructor(private http: HttpClient) {}
-
+  baseUrl = 'http://localhost:5454';
   createOrder(orderData: any): Observable<any> {
-    return this.http.post<any>(`http://localhost:5454/api/payment/`, orderData);
+    console.log('orderData:', orderData);
+    return this.http.post<any>(`${this.baseUrl}/api/payment/`, orderData);
   }
   verifyPayment(paymentData: any): Observable<any> {
     return this.http.post<any>(
-      `http://localhost:5454/api/payment/verify`,
+      `${this.baseUrl}/api/payment/verify`,
       paymentData
     );
   }
