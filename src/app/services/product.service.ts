@@ -8,7 +8,8 @@ import { __values } from 'tslib';
 })
 export class ProductService {
   constructor(private http: HttpClient) {}
-  baseUrl = 'http://localhost:5454';
+  //baseUrl = 'http://localhost:5454';
+  baseUrl = 'https://e-commercebackendnodejs.onrender.com';
   getProductFromCategory(category: string): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/api/products/${category}`);
   }
@@ -19,7 +20,6 @@ export class ProductService {
   public categorySubject = new Subject<string>();
 
   setCategoryData(data: string) {
-    console.log('sendedCategoryData :', data);
     this.categorySubject.next(data);
   }
   getCategoryData() {

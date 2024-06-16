@@ -1,4 +1,10 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  DoCheck,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,6 +23,7 @@ import {
 import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-products',
   standalone: true,
@@ -34,11 +41,12 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     MatRadioModule,
     NgbPaginationModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
-export class ProductsComponent implements OnInit, OnChanges {
+export class ProductsComponent implements OnInit, OnChanges, DoCheck {
   constructor(
     private productService: ProductService,
     private wishlistService: WishlistService,
@@ -79,11 +87,17 @@ export class ProductsComponent implements OnInit, OnChanges {
   ];
 
   ngOnInit(): void {
+    //called once after constructor get called
     this.getMenTrendingProduct();
     this.getSearchedAndFilteredData();
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('onchange called');
+    //only worked for change in input or output decorator
+    console.log('ngOnChanges called');
+  }
+  ngDoCheck(): void {
+    //every change in life cycle ngDoCheck called
+    console.log('ngDoCheck called');
   }
   queryData = {
     search: '',

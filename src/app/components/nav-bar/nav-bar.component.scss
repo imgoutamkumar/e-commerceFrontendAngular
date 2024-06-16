@@ -15,14 +15,18 @@
   }
   .signIn-button {
     margin-right: 20px;
-    background-color: #ff004f;
+    border: 1px white solid;
+    background-color: black;
+    //background-color: #ff004f;
     //background: linear-gradient(rgba(243, 243, 243, 0.6), #ff004f);
     // background-color: #1db954;
     color: white;
   }
   .signIn-button:hover {
     color: #ff004f;
-    background-color: white;
+    background-color: black;
+    border: 1px #ff004f solid;
+    // background-color: white;
   }
   .profile-icon {
     width: 44px;

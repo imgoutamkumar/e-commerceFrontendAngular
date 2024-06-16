@@ -104,22 +104,37 @@
         </mat-card>
       </div>
     </div>
+
     <div class="col-10">
-      <section style="min-height: 700px">
-        <div class="productsContainer">
-          <ng-container *ngFor="let product of searchedAndFilteredProducts">
-            <app-product-card [productData]="product"></app-product-card>
-          </ng-container>
-        </div>
-      </section>
-      <ngb-pagination
-        class="d-flex justify-content-center"
-        [collectionSize]="totalPage"
-        [(page)]="page"
-        [maxSize]="5"
-        [rotate]="true"
-        [boundaryLinks]="true"
-      />
+      <ng-container *ngIf="searchedAndFilteredProducts; else loading">
+        <section style="min-height: 700px">
+          <div class="productsContainer">
+            <ng-container *ngFor="let product of searchedAndFilteredProducts">
+              <app-product-card [productData]="product"></app-product-card>
+            </ng-container>
+          </div>
+        </section>
+        <ngb-pagination
+          class="d-flex justify-content-center"
+          [collectionSize]="totalPage"
+          [(page)]="page"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+        />
+      </ng-container>
     </div>
   </div>
 </div>
+<ng-template #loading>
+  <div
+    style="
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding-top: 30px;
+    "
+  >
+    <mat-spinner style="height: 50px; width: 50px" color="warn"></mat-spinner>
+  </div>
+</ng-template>

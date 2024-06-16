@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -12,11 +19,14 @@ import { WishlistService } from '../../services/wishlist.service';
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss',
 })
-export class ProductCardComponent {
+export class ProductCardComponent implements OnChanges {
   constructor(
     private router: Router,
     private wishlistService: WishlistService
   ) {}
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('ngOnChanges called');
+  }
 
   @Input() productData!: any;
   //@Output() data = new EventEmitter();

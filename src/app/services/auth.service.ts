@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  baseUrl = 'http://localhost:5454';
+  //baseUrl = 'http://localhost:5454';
+  baseUrl = 'https://e-commercebackendnodejs.onrender.com';
   logIn(formData: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/auth/signin`, formData);
   }

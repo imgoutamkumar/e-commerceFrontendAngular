@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class PaymentService {
   constructor(private http: HttpClient) {}
-  baseUrl = 'http://localhost:5454';
+  //baseUrl = 'http://localhost:5454';
+  baseUrl = 'https://e-commercebackendnodejs.onrender.com';
   createOrder(orderData: any): Observable<any> {
     console.log('orderData:', orderData);
     return this.http.post<any>(`${this.baseUrl}/api/payment/`, orderData);

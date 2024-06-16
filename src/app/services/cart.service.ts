@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class CartService {
   constructor(private http: HttpClient) {}
-  baseUrl = 'http://localhost:5454';
+  //baseUrl = 'http://localhost:5454';
+  baseUrl = 'https://e-commercebackendnodejs.onrender.com';
   getUSerCart(): Observable<any> {
     let headers = new HttpHeaders().set(
       'Authorization',
