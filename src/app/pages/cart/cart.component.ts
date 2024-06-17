@@ -13,6 +13,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 declare var Razorpay: any;
 @Component({
   selector: 'app-cart',
@@ -27,6 +28,7 @@ declare var Razorpay: any;
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class CartComponent implements OnInit {

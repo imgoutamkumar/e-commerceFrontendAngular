@@ -1,11 +1,11 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { Route, Router, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { LoginFormComponent } from '../login-form/login-form.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { AuthService } from '../../services/auth.service';
@@ -17,7 +17,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { CommonService } from '../../services/common.service';
 import { ProductService } from '../../services/product.service';
 
 @Component({
@@ -37,7 +36,7 @@ import { ProductService } from '../../services/product.service';
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.scss',
 })
-export class NavBarComponent implements OnInit, AfterViewInit {
+export class NavBarComponent implements OnInit {
   searchForm: FormGroup;
   constructor(
     public dialog: MatDialog,
@@ -49,9 +48,6 @@ export class NavBarComponent implements OnInit, AfterViewInit {
     this.searchForm = this.fb.group({
       search: ['', Validators.required],
     });
-  }
-  ngAfterViewInit(): void {
-    console.log('afterViewInit called');
   }
 
   ngOnInit(): void {
@@ -77,15 +73,28 @@ export class NavBarComponent implements OnInit, AfterViewInit {
 
   loggedIn: boolean = false;
   isLoggedIn() {
-    if (localStorage.getItem('token')) {
-      this.loggedIn = true;
+    if (
+      typeof window !== 'undefined' &&
+      typeof window.localStorage !== 'undefined'
+    ) {
+      if (localStorage.getItem('token')) {
+        this.loggedIn = true;
+      }
     }
   }
   logOut() {
-    localStorage.setItem('token', '');
-    this.loggedIn = false;
-    this.isLoggedIn();
-    this.route.navigate(['home']);
+    if (
+      typeof window !== 'undefined' &&
+      typeof window.localStorage !== 'undefined'
+    ) {
+      localStorage.setItem('token', '');
+      this.loggedIn = false;
+      this.isLoggedIn();
+      this.route.navigate(['home']);
+    } else {
+      // Handle the case where localStorage is not available
+      console.warn('localStorage is not supported');
+    }
   }
 
   search() {

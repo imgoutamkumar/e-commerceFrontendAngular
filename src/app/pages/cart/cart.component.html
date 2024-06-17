@@ -1,89 +1,89 @@
-@if (cart?.cartItems) {
 <section style="min-height: 70vh; padding: 0px 120px">
-  <div class="row">
-    <div class="col-7">
-      <ng-container *ngFor="let item of cart?.cartItems">
-        <app-cart-item [cartItemsData]="item"></app-cart-item
-      ></ng-container>
-    </div>
-    <div class="col-5">
-      <div class="addressContainer">
+  <ng-container *ngIf="cart; else loading">
+    <div class="row">
+      <div class="col-7">
+        <ng-container *ngFor="let item of cart?.cartItems">
+          <app-cart-item [cartItemsData]="item"></app-cart-item
+        ></ng-container>
+      </div>
+      <div class="col-5">
+        <div class="addressContainer">
+          <mat-card>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              "
+            >
+              <div>
+                <h2 style="color: #ff004f; margin-bottom: 10px">
+                  Delivery Address
+                </h2>
+                <h3
+                  style="
+                    color: white;
+                    font-size: 15px;
+                    margin: 0px;
+                    font-weight: 500;
+                  "
+                >
+                  Goutam Kumar
+                </h3>
+              </div>
+              <div>
+                <button mat-raised-button>Change Address</button>
+              </div>
+            </div>
+            <mat-card-content>
+              <div style="font-weight: 300">
+                <span>72,</span>
+                <span>Rajganj,</span>
+                <span>Dhanbad,</span>
+                <span>Jharkhand,</span>
+                <span>828113,</span>
+                <span>India</span>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
         <mat-card>
-          <div
-            style="
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-            "
-          >
-            <div>
-              <h2 style="color: #ff004f; margin-bottom: 10px">
-                Delivery Address
-              </h2>
-              <h3
-                style="
-                  color: white;
-                  font-size: 15px;
-                  margin: 0px;
-                  font-weight: 500;
-                "
-              >
-                Goutam Kumar
-              </h3>
-            </div>
-            <div>
-              <button mat-raised-button>Change Address</button>
-            </div>
-          </div>
+          <mat-card-header>
+            <mat-card-title>Price Details</mat-card-title>
+          </mat-card-header>
           <mat-card-content>
-            <div style="font-weight: 300">
-              <span>72,</span>
-              <span>Rajganj,</span>
-              <span>Dhanbad,</span>
-              <span>Jharkhand,</span>
-              <span>828113,</span>
-              <span>India</span>
+            <div>
+              <h3>Total Price :</h3>
+              <span></span>
+              <h3>{{ this.cart?.totalPrice | number : "1.2-2" }}</h3>
             </div>
+            <div>
+              <h3>Total Savings :</h3>
+              <h3>{{ this.cart?.totalSavings | number : "1.2-2" }}</h3>
+            </div>
+            <div>
+              <h3>Delivery Charge :</h3>
+              <h3>free</h3>
+            </div>
+            <br />
+            <mat-divider style="background-color: white"></mat-divider>
+            <form>
+              <div>
+                <h2 style="margin: 12px 0px">Total Payable :</h2>
+                <h2 style="margin: 12px 0px">
+                  {{ this.cart?.totalPrice | number : "1.2-2" }}
+                </h2>
+              </div>
+              <button class="check-out-button" (click)="pay()">
+                Proceed to Checkout
+              </button>
+            </form>
           </mat-card-content>
         </mat-card>
       </div>
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>Price Details</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <div>
-            <h3>Total Price :</h3>
-            <span></span>
-            <h3>{{ this.cart?.totalPrice | number : "1.2-2" }}</h3>
-          </div>
-          <div>
-            <h3>Total Savings :</h3>
-            <h3>{{ this.cart?.totalSavings | number : "1.2-2" }}</h3>
-          </div>
-          <div>
-            <h3>Delivery Charge :</h3>
-            <h3>free</h3>
-          </div>
-          <br />
-          <mat-divider style="background-color: white"></mat-divider>
-          <form>
-            <div>
-              <h2 style="margin: 12px 0px">Total Payable :</h2>
-              <h2 style="margin: 12px 0px">
-                {{ this.cart?.totalPrice | number : "1.2-2" }}
-              </h2>
-            </div>
-            <button class="check-out-button" (click)="pay()">
-              Proceed to Checkout
-            </button>
-          </form>
-        </mat-card-content>
-      </mat-card>
     </div>
-  </div>
+  </ng-container>
 </section>
-}
 
 <!-- @else{
   <section style="height: 600px">
@@ -102,3 +102,15 @@
     </div>
   </section>
   } -->
+<ng-template #loading>
+  <div
+    style="
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding-top: 30px;
+    "
+  >
+    <mat-spinner style="height: 50px; width: 50px" color="warn"></mat-spinner>
+  </div>
+</ng-template>

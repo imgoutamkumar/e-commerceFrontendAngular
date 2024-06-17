@@ -4,6 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { WishlistCardComponent } from '../../components/wishlist-card/wishlist-card.component';
 import { WishlistService } from '../../services/wishlist.service';
 import { CommonModule } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-wishlist',
@@ -13,6 +14,7 @@ import { CommonModule } from '@angular/common';
     WishlistCardComponent,
     MatButtonModule,
     MatIconModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './wishlist.component.html',
   styleUrl: './wishlist.component.scss',

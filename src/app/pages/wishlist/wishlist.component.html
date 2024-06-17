@@ -1,7 +1,21 @@
 <div class="wishlistContainer">
-  <div class="wishlistContainerItems">
-    <div *ngFor="let item of wishlistItemsData?.wishlistItems">
-      <app-wishlist-card [wislistItem]="item"></app-wishlist-card>
+  <ng-container *ngIf="wishlistItemsData; else loading">
+    <div class="wishlistContainerItems">
+      <div *ngFor="let item of wishlistItemsData?.wishlistItems">
+        <app-wishlist-card [wislistItem]="item"></app-wishlist-card>
+      </div>
     </div>
-  </div>
+  </ng-container>
 </div>
+<ng-template #loading>
+  <div
+    style="
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding-top: 30px;
+    "
+  >
+    <mat-spinner style="height: 50px; width: 50px" color="warn"></mat-spinner>
+  </div>
+</ng-template>
