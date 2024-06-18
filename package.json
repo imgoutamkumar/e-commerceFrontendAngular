@@ -28,7 +28,6 @@
     "express": "^4.18.2",
     "force": "^0.0.3",
     "hammerjs": "^2.0.8",
-    "ngx-markdown": "^18.0.0",
     "rxjs": "~7.8.0",
     "swiper": "^11.1.3",
     "tslib": "^2.3.0",

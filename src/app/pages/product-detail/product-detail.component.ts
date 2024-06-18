@@ -1,5 +1,5 @@
 import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ProductSliderComponent } from '../../components/product-slider/product-slider.component';
 import { MatRadioModule } from '@angular/material/radio';
@@ -13,6 +13,7 @@ import { WishlistService } from '../../services/wishlist.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBarComponent } from '../../components/snack-bar/snack-bar.component';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
+
 @Component({
   selector: 'app-product-detail',
   standalone: true,
@@ -27,6 +28,7 @@ import { ProductCardComponent } from '../../components/product-card/product-card
     MatCardModule,
     HammerModule,
     ProductCardComponent,
+    NgOptimizedImage,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

@@ -8,7 +8,11 @@ import {
 } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withFetch,
+} from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,5 +22,6 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(HammerModule),
     provideRouter(routes),
     provideHttpClient(),
+    provideHttpClient(withFetch()),
   ],
 };
