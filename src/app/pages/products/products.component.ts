@@ -15,7 +15,11 @@ import { CommonModule } from '@angular/common';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
 import { ProductService } from '../../services/product.service';
 import { WishlistService } from '../../services/wishlist.service';
-import { ActivatedRoute, withComponentInputBinding } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router,
+  withComponentInputBinding,
+} from '@angular/router';
 import {
   MatCheckboxChange,
   MatCheckboxModule,
@@ -46,11 +50,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
-export class ProductsComponent implements OnInit, OnChanges, DoCheck {
+export class ProductsComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private wishlistService: WishlistService,
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     private fb: FormBuilder
   ) {}
 
@@ -88,17 +93,24 @@ export class ProductsComponent implements OnInit, OnChanges, DoCheck {
 
   ngOnInit(): void {
     //called once after constructor get called
+    /* this.activatedRoute.queryParamMap.subscribe((paramMap) => {
+      console.log('paramMap', paramMap); // Get all 'sort' values if present multiple times
+    }); */
     this.getMenTrendingProduct();
     this.getSearchedAndFilteredData();
   }
-  ngOnChanges(changes: SimpleChanges): void {
-    //only worked for change in input or output decorator
-    console.log('ngOnChanges called');
-  }
-  ngDoCheck(): void {
-    //every change in life cycle ngDoCheck called
-    console.log('ngDoCheck called');
-  }
+  /* updateQueryParams() {
+    const newQueryParams = {
+      discount: 20,
+      color: 'red',
+      brd: '',
+    };
+    this.router.navigate([], {
+      queryParams: newQueryParams,
+      queryParamsHandling: 'merge',
+    });
+  } */
+
   queryData = {
     search: '',
     page: 1,
@@ -111,6 +123,7 @@ export class ProductsComponent implements OnInit, OnChanges, DoCheck {
     this.cat = cat;
     //this.productService.setCategoryData(cat);
     this.getSearchedAndFilteredData();
+    //this.updateQueryParams();
   }
   selectedCheckBoxValue: any;
   selectedCheckBoxSet = new Set();
@@ -121,6 +134,7 @@ export class ProductsComponent implements OnInit, OnChanges, DoCheck {
     if (checkbox.checked === false) {
       this.selectedCheckBoxSet.delete(checkbox.source.value);
     }
+    // this.updateQueryParams();
     console.log(this.selectedCheckBoxSet);
     this.getSearchedAndFilteredData();
   }

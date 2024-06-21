@@ -19,14 +19,11 @@ import { WishlistService } from '../../services/wishlist.service';
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss',
 })
-export class ProductCardComponent implements OnChanges {
+export class ProductCardComponent {
   constructor(
     private router: Router,
     private wishlistService: WishlistService
   ) {}
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('ngOnChanges called');
-  }
 
   @Input() productData!: any;
   //@Output() data = new EventEmitter();
