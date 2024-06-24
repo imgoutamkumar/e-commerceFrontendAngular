@@ -130,13 +130,13 @@ export class ProductsComponent implements OnInit {
     this.cat = cat;
     //this.productService.setCategoryData(cat);
     this.updateQueryParams();
-    this.getSearchedAndFilteredData();
+    // this.getSearchedAndFilteredData();
   }
 
   onPageChange(p: number) {
     console.log(this.page);
     this.updateQueryParams();
-    this.getSearchedAndFilteredData();
+    // this.getSearchedAndFilteredData();
   }
 
   selectedCheckBoxSet = new Set();
@@ -150,11 +150,11 @@ export class ProductsComponent implements OnInit {
     }
 
     this.paramBrandVAlue = [...this.selectedCheckBoxSet].join(',');
-    console.log('this.selectedCheckBoxSet', this.selectedCheckBoxSet);
+    //console.log('this.selectedCheckBoxSet', this.selectedCheckBoxSet);
     this.paramBrandVAlue = [...this.selectedCheckBoxSet].join(',');
-    console.log('this.paramBrandVAlue', this.paramBrandVAlue);
+    //console.log('this.paramBrandVAlue', this.paramBrandVAlue);
     this.updateQueryParams();
-    this.getSearchedAndFilteredData();
+    //  this.getSearchedAndFilteredData();
   }
 
   searchedAndFilteredProducts: any;
@@ -196,7 +196,7 @@ export class ProductsComponent implements OnInit {
           ? value.get('category')
           : '';
         const brnd = value.get('brand');
-        console.log(brnd?.split(','));
+        //console.log(brnd?.split(','));
         this.queryData.brand = brnd ? brnd.split(',') : [];
         this.queryData.page = value.get('page') ? value.get('page') : this.page;
         this.productService.searchAndFilteredProduct(this.queryData).subscribe({
@@ -229,7 +229,7 @@ export class ProductsComponent implements OnInit {
   }
 
   addToWishlist(e: Event) {
-    console.log(e);
+    //console.log(e);
     this.wishlistService.addToWishlist(e.toString()).subscribe({
       next: (result: any) => {
         console.log('message:', result);

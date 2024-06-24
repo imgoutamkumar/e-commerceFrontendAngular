@@ -54,6 +54,7 @@ export class HomeComponent implements OnInit, OnChanges {
     this.route.navigate(['products'], {
       queryParams: {
         brand: tileData.brand,
+        page: 1,
         // category: this.catData,
       },
       queryParamsHandling: 'merge',

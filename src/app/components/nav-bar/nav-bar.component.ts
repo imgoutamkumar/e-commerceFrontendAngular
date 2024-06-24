@@ -101,8 +101,10 @@ export class NavBarComponent implements OnInit {
     this.route.navigate(['products'], {
       queryParams: {
         search: this.searchForm.value.search,
+        page: 1,
         // category: this.catData,
       },
+      queryParamsHandling: 'merge',
     });
   }
 }
