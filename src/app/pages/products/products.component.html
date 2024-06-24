@@ -33,7 +33,7 @@
                   <mat-radio-button
                     class="example-radio-button"
                     [value]="category"
-                    (change)="onChange(category)"
+                    (change)="onCategoryChange(category)"
                     ><h3
                       style="
                         margin: 0;
@@ -121,6 +121,7 @@
           [maxSize]="5"
           [rotate]="true"
           [boundaryLinks]="true"
+          (pageChange)="onPageChange(page)"
         />
       </ng-container>
     </div>

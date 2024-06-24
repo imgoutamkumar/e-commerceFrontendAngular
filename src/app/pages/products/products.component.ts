@@ -91,25 +91,32 @@ export class ProductsComponent implements OnInit {
     'ASPORA',
   ];
 
-  ngOnInit(): void {
-    //called once after constructor get called
-    /* this.activatedRoute.queryParamMap.subscribe((paramMap) => {
-      console.log('paramMap', paramMap); // Get all 'sort' values if present multiple times
-    }); */
-    this.getMenTrendingProduct();
-    this.getSearchedAndFilteredData();
-  }
-  /* updateQueryParams() {
+  updateQueryParams() {
     const newQueryParams = {
-      discount: 20,
-      color: 'red',
-      brd: '',
+      page: this.page,
+      category: this.cat,
+      brand: this.paramBrandVAlue,
     };
     this.router.navigate([], {
       queryParams: newQueryParams,
       queryParamsHandling: 'merge',
     });
-  } */
+  }
+
+  ngOnInit(): void {
+    //called once after constructor get called
+    /* this.activatedRoute.queryParamMap.subscribe((value) => {
+      console.log('paramMap', value);
+      console.log('search', value.get('search'));
+      console.log('category', value.get('category'));
+      console.log('brand', value.get('brand'));
+      const b = value.get('brand');
+      console.log('brand in  array form', b?.split(','));
+      console.log('page', value.get('page'));
+    }); */
+    this.getMenTrendingProduct();
+    this.getSearchedAndFilteredData();
+  }
 
   queryData = {
     search: '',
@@ -119,14 +126,21 @@ export class ProductsComponent implements OnInit {
     brand: '',
   };
   cat: string = '';
-  onChange(cat: string) {
+  onCategoryChange(cat: string) {
     this.cat = cat;
     //this.productService.setCategoryData(cat);
+    this.updateQueryParams();
     this.getSearchedAndFilteredData();
-    //this.updateQueryParams();
   }
-  selectedCheckBoxValue: any;
+
+  onPageChange(p: number) {
+    console.log(this.page);
+    this.updateQueryParams();
+    this.getSearchedAndFilteredData();
+  }
+
   selectedCheckBoxSet = new Set();
+  paramBrandVAlue: any;
   onCheckboxChange(checkbox: MatCheckboxChange) {
     if (checkbox.checked === true) {
       this.selectedCheckBoxSet.add(checkbox.source.value);
@@ -134,21 +148,57 @@ export class ProductsComponent implements OnInit {
     if (checkbox.checked === false) {
       this.selectedCheckBoxSet.delete(checkbox.source.value);
     }
-    // this.updateQueryParams();
-    console.log(this.selectedCheckBoxSet);
+
+    this.paramBrandVAlue = [...this.selectedCheckBoxSet].join(',');
+    console.log('this.selectedCheckBoxSet', this.selectedCheckBoxSet);
+    this.paramBrandVAlue = [...this.selectedCheckBoxSet].join(',');
+    console.log('this.paramBrandVAlue', this.paramBrandVAlue);
+    this.updateQueryParams();
     this.getSearchedAndFilteredData();
   }
 
   searchedAndFilteredProducts: any;
-  getSearchedAndFilteredData() {
+  selectedCheckBoxValue: any;
+  /*  getSearchedAndFilteredData() {
     this.activatedRoute.queryParams.subscribe({
       next: (value: any) => {
         this.selectedCheckBoxValue = [...this.selectedCheckBoxSet];
+        console.log('this.selectedCheckBoxValue', this.selectedCheckBoxValue);
         console.log('queryValue', value);
         this.queryData.search = value.search;
         this.queryData.category = this.cat;
         this.queryData.brand = this.selectedCheckBoxValue;
         this.queryData.page = this.page;
+        console.log('this.queryData.page :', this.queryData.page);
+        this.productService.searchAndFilteredProduct(this.queryData).subscribe({
+          next: (result: any) => {
+            console.log(result);
+            this.totalPage = result.productCount * 10;
+            this.searchedAndFilteredProducts = result.products;
+          },
+          error: (error: any) => {
+            console.log(error);
+          },
+        });
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
+    });
+  } */
+
+  getSearchedAndFilteredData() {
+    this.activatedRoute.queryParamMap.subscribe({
+      next: (value: any) => {
+        console.log('queryParamMap values', value);
+        this.queryData.search = value.get('search') ? value.get('search') : '';
+        this.queryData.category = value.get('category')
+          ? value.get('category')
+          : '';
+        const brnd = value.get('brand');
+        console.log(brnd?.split(','));
+        this.queryData.brand = brnd ? brnd.split(',') : [];
+        this.queryData.page = value.get('page') ? value.get('page') : this.page;
         this.productService.searchAndFilteredProduct(this.queryData).subscribe({
           next: (result: any) => {
             console.log(result);
@@ -167,7 +217,6 @@ export class ProductsComponent implements OnInit {
   }
 
   mensTrendingProduct: any;
-
   getMenTrendingProduct() {
     this.productService.getProductFromCategory('Men').subscribe({
       next: (result: any) => {

@@ -56,6 +56,7 @@ export class HomeComponent implements OnInit, OnChanges {
         brand: tileData.brand,
         // category: this.catData,
       },
+      queryParamsHandling: 'merge',
     });
   }
 
