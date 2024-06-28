@@ -31,7 +31,11 @@ export class ProductService {
     const params = new HttpParams()
       .set('search', queryData.search)
       .set('category', queryData.category)
-      .set('brand', queryData.brand);
+      .set('brand', queryData.brand)
+      .set('discount', queryData.discount)
+      .set('page', queryData.page)
+      .set('minPrice', queryData.minPrice)
+      .set('maxPrice', queryData.maxPrice);
     return this.http.get<any>(`${this.baseUrl}/api/allProducts/search`, {
       params: params,
     });

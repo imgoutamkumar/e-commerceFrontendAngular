@@ -58,7 +58,14 @@
       </button>
     </form>
   </span>
-  <button mat-button [matMenuTriggerFor]="category" class="nav-bar-item">
+  <button
+    ngbPopover="functionality not working!"
+    triggers="mouseenter:mouseleave"
+    popoverTitle="!warning"
+    mat-button
+    [matMenuTriggerFor]="category"
+    class="nav-bar-item"
+  >
     Category
   </button>
   <a routerLink="/order">
@@ -125,12 +132,31 @@
 </mat-menu>
 
 <mat-menu #category="matMenu">
-  <button mat-menu-item [matMenuTriggerFor]="mens">Men</button>
+  @for (category of categories; track $index) {
+  <button
+    mat-menu-item
+    [matMenuTriggerFor]="category"
+    (click)="getSubCategories(category)"
+  >
+    {{ category }}
+  </button>
+  }
+  <button mat-menu-item [matMenuTriggerFor]="Men">Men</button>
   <button mat-menu-item [matMenuTriggerFor]="womens">Women</button>
-  <button mat-menu-item [matMenuTriggerFor]="kids">Kids</button>
 </mat-menu>
 
-<mat-menu #mens="matMenu">
+<mat-menu #Men="matMenu">
+  @for (subCategory of subCategories; track $index) {
+  <button mat-menu-item [matMenuTriggerFor]="subCategory">
+    {{ subCategory }}
+  </button>
+
+  <button mat-menu-item>{{ subCategory }}</button>
+
+  }
+</mat-menu>
+
+<mat-menu #Men="matMenu">
   <button mat-menu-item [matMenuTriggerFor]="topWear">Top Wear</button>
   <button mat-menu-item [matMenuTriggerFor]="bottomWear">Bottom Wear</button>
   <button mat-menu-item [matMenuTriggerFor]="casualWear">Casual Wear</button>

@@ -18,7 +18,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { ProductService } from '../../services/product.service';
-
+import { CategoryService } from '../../services/category.service';
+import { NgbPopoverModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthComponent } from '../auth/auth.component';
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
@@ -32,6 +34,7 @@ import { ProductService } from '../../services/product.service';
     MatBadgeModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbPopoverModule,
   ],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.scss',
@@ -43,7 +46,8 @@ export class NavBarComponent implements OnInit {
     private route: Router,
     private authService: AuthService,
     private fb: FormBuilder,
-    private productService: ProductService
+    private productService: ProductService,
+    private categoryService: CategoryService
   ) {
     this.searchForm = this.fb.group({
       search: ['', Validators.required],
@@ -53,6 +57,7 @@ export class NavBarComponent implements OnInit {
   ngOnInit(): void {
     this.isLoggedIn();
     // this.getCategoryData();
+    this.getCategories();
   }
 
   /* catData: string = '';
@@ -68,7 +73,7 @@ export class NavBarComponent implements OnInit {
   } */
 
   openLoginFormDialog(): void {
-    this.dialog.open(LoginFormComponent, { panelClass: 'my-custom-dialog' });
+    this.dialog.open(AuthComponent, { panelClass: 'my-custom-dialog' });
   }
 
   loggedIn: boolean = false;
@@ -106,5 +111,58 @@ export class NavBarComponent implements OnInit {
       },
       queryParamsHandling: 'merge',
     });
+  }
+  categories: any;
+  subCategories: any;
+  subCategoriesItems: any;
+  c: any;
+  getCat() {
+    const c = this.categoryService.getAllCategory();
+  }
+  getCategories() {
+    this.categoryService.getAllCategory().subscribe({
+      next: (result) => {
+        const categoryData = result;
+        this.categories = categoryData.map((item: any) => {
+          return item.name;
+        });
+        console.log(this.categories);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
+  getSubCategories(category: string) {
+    this.categoryService.getAllSubCategoryByCategory(category).subscribe({
+      next: (result) => {
+        const subCategoryData = result;
+        this.subCategories = subCategoryData.map((item: any) => {
+          return item.name;
+        });
+        console.log(this.subCategories);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
+  getSubCategoryItems(subCategory: string) {
+    this.categoryService
+      .getAllSubCategoryItemsBySubCategory(subCategory)
+      .subscribe({
+        next: (result) => {
+          const subCategoryItemsData = result;
+          this.subCategoriesItems = subCategoryItemsData.map((item: any) => {
+            return item.name;
+          });
+          console.log(this.subCategoriesItems);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
   }
 }

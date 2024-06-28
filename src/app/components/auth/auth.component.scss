@@ -1,0 +1,45 @@
+.formContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  background-color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  transition: 0.5s ease-in-out;
+  app-login-form {
+    width: 99%;
+  }
+  .loginForm {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    transition: 0.5s;
+    transition-delay: 0.25s;
+  }
+  .signupForm {
+    position: absolute;
+    left: 50%;
+    width: 100%;
+    transition: 0.5s;
+    transition-delay: 0.25s;
+  }
+}
+.formContainer.active .loginForm {
+  left: -100%;
+  transition-delay: 0s;
+}
+.formContainer .signupForm {
+  left: 100%;
+  transition-delay: 0s;
+}
+.formContainer.active .signupForm {
+  left: 0;
+}
+.formContainer.active {
+  left: 50%;
+}

@@ -28,6 +28,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSliderModule } from '@angular/material/slider';
 @Component({
   selector: 'app-products',
   standalone: true,
@@ -46,6 +47,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatRadioModule,
     NgbPaginationModule,
     MatProgressSpinnerModule,
+    MatSliderModule,
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
@@ -59,9 +61,9 @@ export class ProductsComponent implements OnInit {
     private fb: FormBuilder
   ) {}
 
-  page = 1;
   totalPage: any;
   categories: string[] = ['Men', 'Women', 'Girls', 'Boys'];
+  discounts: number[] = [20, 30, 40, 50, 60, 70, 80, 90];
   brands: string[] = [
     'Biba',
     'Amrutam Fab',
@@ -91,12 +93,16 @@ export class ProductsComponent implements OnInit {
     'ASPORA',
   ];
 
-  updateQueryParams() {
-    const newQueryParams = {
+  /* const newQueryParams = {
       page: this.page,
-      category: this.cat,
+      //category: this.category,
       brand: this.paramBrandVAlue,
-    };
+      discount: this.discountPercent,
+      minPrice: this.minPrice,
+      maxPrice: this.maxPrice,
+    }; */
+
+  updateQueryParams(newQueryParams: any) {
     this.router.navigate([], {
       queryParams: newQueryParams,
       queryParamsHandling: 'merge',
@@ -104,7 +110,9 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('ngOnInit called');
     //called once after constructor get called
+
     /* this.activatedRoute.queryParamMap.subscribe((value) => {
       console.log('paramMap', value);
       console.log('search', value.get('search'));
@@ -114,7 +122,8 @@ export class ProductsComponent implements OnInit {
       console.log('brand in  array form', b?.split(','));
       console.log('page', value.get('page'));
     }); */
-    this.getMenTrendingProduct();
+
+    // this.getMenTrendingProduct();
     this.getSearchedAndFilteredData();
   }
 
@@ -124,21 +133,50 @@ export class ProductsComponent implements OnInit {
     category: '',
     limit: '',
     brand: '',
+    discount: 0,
+    minPrice: 0,
+    maxPrice: 10000,
   };
-  cat: string = '';
-  onCategoryChange(cat: string) {
-    this.cat = cat;
-    //this.productService.setCategoryData(cat);
-    this.updateQueryParams();
-    // this.getSearchedAndFilteredData();
+
+  category: string = '';
+  onCategoryChange(event: Event) {
+    console.log('change detected : ', event);
+    const newQueryParams = {
+      category: event,
+    };
+    this.updateQueryParams(newQueryParams);
   }
 
+  discountPercent = 0;
+  onDiscountChange(event: Event) {
+    console.log('change detected : ', event);
+    const newQueryParams = {
+      discount: this.discountPercent,
+    };
+    this.updateQueryParams(newQueryParams);
+  }
+
+  maxPrice = 10000;
+  minPrice = 0;
+  onPriceRangeChange(event: Event) {
+    console.log('change detected : ', event);
+    const newQueryParams = {
+      minPrice: this.minPrice,
+      maxPrice: this.maxPrice,
+    };
+    this.updateQueryParams(newQueryParams);
+  }
+
+  page = 1;
   onPageChange(p: number) {
     console.log(this.page);
-    this.updateQueryParams();
-    // this.getSearchedAndFilteredData();
+    const newQueryParams = {
+      page: this.page,
+    };
+    this.updateQueryParams(newQueryParams);
   }
 
+  checkboxvalue = '';
   selectedCheckBoxSet = new Set();
   paramBrandVAlue: any;
   onCheckboxChange(checkbox: MatCheckboxChange) {
@@ -153,7 +191,10 @@ export class ProductsComponent implements OnInit {
     //console.log('this.selectedCheckBoxSet', this.selectedCheckBoxSet);
     this.paramBrandVAlue = [...this.selectedCheckBoxSet].join(',');
     //console.log('this.paramBrandVAlue', this.paramBrandVAlue);
-    this.updateQueryParams();
+    const newQueryParams = {
+      brand: this.paramBrandVAlue,
+    };
+    this.updateQueryParams(newQueryParams);
     //  this.getSearchedAndFilteredData();
   }
 
@@ -191,18 +232,36 @@ export class ProductsComponent implements OnInit {
     this.activatedRoute.queryParamMap.subscribe({
       next: (value: any) => {
         console.log('queryParamMap values', value);
+        console.log('query discount :', value.get('discount'));
+
         this.queryData.search = value.get('search') ? value.get('search') : '';
+
         this.queryData.category = value.get('category')
           ? value.get('category')
           : '';
+
         const brnd = value.get('brand');
         //console.log(brnd?.split(','));
         this.queryData.brand = brnd ? brnd.split(',') : [];
+
         this.queryData.page = value.get('page') ? value.get('page') : this.page;
+
+        this.queryData.discount = value.get('discount')
+          ? value.get('discount')
+          : 0;
+
+        this.queryData.minPrice = value.get('minPrice')
+          ? value.get('minPrice')
+          : this.minPrice;
+
+        this.queryData.maxPrice = value.get('maxPrice')
+          ? value.get('maxPrice')
+          : this.maxPrice;
+
         this.productService.searchAndFilteredProduct(this.queryData).subscribe({
           next: (result: any) => {
             console.log(result);
-            this.totalPage = result.productCount * 10;
+            this.totalPage = result.productCount;
             this.searchedAndFilteredProducts = result.products;
           },
           error: (error: any) => {
@@ -212,18 +271,6 @@ export class ProductsComponent implements OnInit {
       },
       error: (error: any) => {
         console.log(error);
-      },
-    });
-  }
-
-  mensTrendingProduct: any;
-  getMenTrendingProduct() {
-    this.productService.getProductFromCategory('Men').subscribe({
-      next: (result: any) => {
-        this.mensTrendingProduct = result;
-      },
-      error: (error: any) => {
-        console.log('error', error);
       },
     });
   }

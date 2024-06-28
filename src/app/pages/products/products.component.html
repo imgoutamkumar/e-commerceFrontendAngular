@@ -26,14 +26,17 @@
         <mat-card style="width: 100%">
           <mat-card-content>
             <section class="example-section">
-              <h4 style="font-weight: 500">Select category:</h4>
-              <mat-radio-group class="example-radio-group" [(ngModel)]="cat">
+              <h4 style="font-weight: 500">Select category :</h4>
+              <mat-radio-group
+                class="example-radio-group"
+                [(ngModel)]="category"
+                (ngModelChange)="onCategoryChange($event)"
+              >
                 <div style="display: flex; flex-direction: column">
                   @for (category of categories; track category ) {
                   <mat-radio-button
                     class="example-radio-button"
                     [value]="category"
-                    (change)="onCategoryChange(category)"
                     ><h3
                       style="
                         margin: 0;
@@ -52,7 +55,7 @@
         </mat-card>
         <mat-card style="width: 100%">
           <mat-card-header>
-            <h4 style="font-weight: 500">Brands:</h4>
+            <h4 style="font-weight: 500">Brands :</h4>
           </mat-card-header>
 
           <mat-card-content
@@ -81,24 +84,63 @@
             </section>
           </mat-card-content>
         </mat-card>
+
         <mat-card style="width: 100%">
           <mat-card-content>
             <section class="example-section">
-              <h4 style="font-weight: 500">Price Range:</h4>
+              <h4 style="font-weight: 500">Price Range :</h4>
               <div style="display: flex; flex-direction: column">
-                <mat-checkbox>
-                  <p style="color: rgb(211, 211, 211)">less then 1000</p>
-                </mat-checkbox>
-                <mat-checkbox>
-                  <p style="color: rgb(211, 211, 211)">1000 to 2500</p>
-                </mat-checkbox>
-                <mat-checkbox>
-                  <p style="color: rgb(211, 211, 211)">2500 to 5000</p>
-                </mat-checkbox>
-                <mat-checkbox>
-                  <p style="color: rgb(211, 211, 211)">5000 and above</p>
-                </mat-checkbox>
+                <mat-slider
+                  [min]="0"
+                  [max]="10000"
+                  showTickMarks
+                  discrete
+                  step="1000"
+                >
+                  <input
+                    value="0"
+                    matSliderStartThumb
+                    [(ngModel)]="minPrice"
+                    (ngModelChange)="onPriceRangeChange($event)"
+                  />
+                  <input
+                    value="10000"
+                    matSliderEndThumb
+                    [(ngModel)]="maxPrice"
+                    (ngModelChange)="onPriceRangeChange($event)"
+                  />
+                </mat-slider>
               </div>
+            </section>
+          </mat-card-content>
+        </mat-card>
+        <mat-card style="width: 100%">
+          <mat-card-content>
+            <section class="example-section">
+              <h4 style="font-weight: 500">Discount range :</h4>
+              <mat-radio-group
+                class="example-radio-group"
+                [(ngModel)]="discountPercent"
+                (ngModelChange)="onDiscountChange($event)"
+              >
+                <div style="display: flex; flex-direction: column">
+                  @for (discount of discounts; track discount ) {
+                  <mat-radio-button
+                    class="example-radio-button"
+                    [value]="discount"
+                    ><h3
+                      style="
+                        margin: 0;
+                        color: rgb(211, 211, 211);
+                        font-size: 14px;
+                      "
+                    >
+                      {{ discount }}% and above
+                    </h3></mat-radio-button
+                  >
+                  }
+                </div>
+              </mat-radio-group>
             </section>
           </mat-card-content>
         </mat-card>

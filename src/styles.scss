@@ -31,9 +31,15 @@ body {
 } */
 
 .my-custom-dialog {
-  min-width: 400px;
-  max-height: 600px;
+  width: 800px;
+  height: 500px;
+  // background-color: rgb(19, 19, 19);
 }
+
+.mat-mdc-text-field-wrapper {
+  border: 1px solid white;
+}
+
 .mdc-checkbox
   .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate):not(
     [data-indeterminate="true"]
