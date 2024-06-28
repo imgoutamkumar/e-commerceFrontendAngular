@@ -39,6 +39,7 @@
 }
 .formContainer.active .signupForm {
   left: 0;
+  transition-delay: 0.25s;
 }
 .formContainer.active {
   left: 50%;

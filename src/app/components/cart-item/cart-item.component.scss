@@ -27,6 +27,9 @@ mat-card {
       width: 124px;
       margin: 8px 0px 8px;
       cursor: pointer;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
       .p-img {
         width: 100%;
         height: 100%;
@@ -35,8 +38,8 @@ mat-card {
       transition: 0.3s;
     }
     .p-item:hover {
-      height: 175px;
-      width: 132px;
+      height: 185px;
+      width: 144px;
       transition-delay: 0s;
     }
   }

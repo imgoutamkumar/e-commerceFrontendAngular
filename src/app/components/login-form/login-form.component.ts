@@ -18,6 +18,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @Component({
   selector: 'app-login-form',
   standalone: true,
@@ -30,6 +31,7 @@ import { Router } from '@angular/router';
     MatInputModule,
     MatCardModule,
     ReactiveFormsModule,
+    MatTooltipModule,
   ],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
@@ -55,7 +57,7 @@ export class LoginFormComponent {
         next: (val: any) => {
           localStorage.setItem('token', val.jwt);
           console.log('user authentication success');
-          this.route.navigate(['home']);
+          this.route.navigate(['home'], { queryParams: { refresh: true } });
           this.dialogRef.close();
           // if (val.role === 'admin') {
           //   console.log('admin authentication success');

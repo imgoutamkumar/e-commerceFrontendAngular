@@ -6,7 +6,18 @@
     <div mat-dialog-content>
       <div class="row">
         <mat-form-field appearance="outline">
-          <input matInput placeholder="Enter name" formControlName="name" />
+          <input
+            matInput
+            placeholder="Enter firstname"
+            formControlName="firstName"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            placeholder="Enter lastname"
+            formControlName="lastName"
+          />
         </mat-form-field>
         <mat-form-field appearance="outline">
           <input matInput placeholder="Enter email" formControlName="email" />
@@ -33,7 +44,7 @@
     </div>
 
     <div mat-dialog-actions class="signUp-form-buttons">
-      <button mat-raised-button color="primary" type="submit">SignUp</button>
+      <button mat-raised-button color="warn" type="submit">SignUp</button>
     </div>
   </form>
 </div>

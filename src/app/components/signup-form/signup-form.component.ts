@@ -46,23 +46,25 @@ export class SignupFormComponent {
     public dialog: MatDialog
   ) {
     this.signUpForm = this.fb.group({
-      name: ['', [Validators.required]],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
   }
   hide = true;
   signUp() {
+    console.log(this.signUpForm.value);
     if (this.signUpForm.valid) {
-      this.authService.logIn(this.signUpForm.value).subscribe({
+      this.authService.SignUp(this.signUpForm.value).subscribe({
         next: (val: any) => {
           localStorage.setItem('token', val.jwt);
-          console.log('user authentication success');
+          console.log('user registration success');
           this.route.navigate(['home']);
           this.dialogRef.close();
         },
         error: (val: any) => {
-          console.log('authentication denied');
+          console.log('registration denied');
         },
       });
     } else {

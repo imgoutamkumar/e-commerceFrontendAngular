@@ -1,5 +1,5 @@
 <div style="width: 100%">
-  <div>
+  <div style="padding: 10px 10px 10px 30px">
     <h1 mat-dialog-title>User Login</h1>
   </div>
   <form [formGroup]="logInForm" (ngSubmit)="signin()">
@@ -32,9 +32,9 @@
 
     <div mat-dialog-actions class="login-form-buttons">
       <a href="">
-        <h3 style="margin: 0">Forgot passowrd ?</h3>
+        <h3>Forgot passowrd ?</h3>
       </a>
-      <button mat-raised-button color="primary" type="submit">Login</button>
+      <button mat-raised-button color="warn" type="submit">Login</button>
     </div>
   </form>
 </div>
