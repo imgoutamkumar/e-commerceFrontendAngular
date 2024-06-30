@@ -13,7 +13,16 @@ import { WishlistService } from '../../services/wishlist.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBarComponent } from '../../components/snack-bar/snack-bar.component';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
-
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { MatRippleModule } from '@angular/material/core';
+import { CartService } from '../../services/cart.service';
 @Component({
   selector: 'app-product-detail',
   standalone: true,
@@ -29,16 +38,27 @@ import { ProductCardComponent } from '../../components/product-card/product-card
     HammerModule,
     ProductCardComponent,
     NgOptimizedImage,
+    FormsModule,
+    ReactiveFormsModule,
+    MatRippleModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ProductDetailComponent implements OnInit {
+  cartFormGroup: FormGroup;
   constructor(
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
+    private cartService: CartService,
     private wishlistService: WishlistService,
-    private matSnackBar: MatSnackBar
-  ) {}
+    private matSnackBar: MatSnackBar,
+    private fb: FormBuilder
+  ) {
+    this.cartFormGroup = this.fb.group({
+      quantity: '',
+      size: ['', Validators.required],
+    });
+  }
 
   ngOnInit(): void {
     this.getProductDetails();
@@ -72,6 +92,39 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
+  quantity = 1;
+  size = '';
+  cartData = {
+    productId: '',
+    quantity: 1,
+    size: '',
+  };
+  addItemToCart() {
+    console.log('cart button clicked');
+    if (this.cartFormGroup.valid) {
+      console.log(this.cartFormGroup.value);
+      this.activatedRoute.paramMap.subscribe({
+        next: (value: any) => {
+          const { quantity, size } = this.cartFormGroup.value;
+          this.cartData.productId = value.get('id');
+          this.cartData.quantity = quantity;
+          this.cartData.size = size;
+          console.log('this.cartData', this.cartData);
+          this.cartService.addToCart(this.cartData).subscribe({
+            next: (result: any) => {
+              console.log(result);
+            },
+            error: (error: any) => {
+              console.log(error);
+            },
+          });
+        },
+        error: (error: any) => {
+          console.log(error);
+        },
+      });
+    }
+  }
   addItemToWishlist() {
     this.activatedRoute.paramMap.subscribe({
       next: (value: any) => {
@@ -92,7 +145,6 @@ export class ProductDetailComponent implements OnInit {
   }
 
   selectedIndex = 0;
-
   showPrevious(i: number) {
     console.log('i:', i);
     if (this.selectedIndex > 0) {

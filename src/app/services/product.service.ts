@@ -17,6 +17,15 @@ export class ProductService {
     return this.http.get<any>(`${this.baseUrl}/api/product/${productId}`);
   }
 
+  getProductByCategoryAndRating(
+    category: string,
+    numRatings: number
+  ): Observable<any> {
+    return this.http.get<any>(
+      `${this.baseUrl}/api/product/${category}/${numRatings}`
+    );
+  }
+
   public categorySubject = new Subject<string>();
 
   setCategoryData(data: string) {

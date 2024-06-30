@@ -45,6 +45,8 @@ export class HomeComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.getWomenTrendingProduct();
     this.getMenTrendingProduct();
+    this.getWomenProductByCategoryAndRating();
+    this.getMenProductByCategoryAndRating();
   }
   ngOnChanges(changes: SimpleChanges): void {}
 
@@ -63,7 +65,29 @@ export class HomeComponent implements OnInit, OnChanges {
 
   womensTrendingProduct: any;
   mensTrendingProduct: any;
-
+  womenProduct: any;
+  getWomenProductByCategoryAndRating() {
+    this.productService.getProductByCategoryAndRating('Women', 3.5).subscribe({
+      next: (result: any) => {
+        console.log('result :', result);
+        this.womenProduct = result;
+      },
+      error: (error: any) => {
+        console.log('error', error);
+      },
+    });
+  }
+  getMenProductByCategoryAndRating() {
+    this.productService.getProductByCategoryAndRating('Men', 3.5).subscribe({
+      next: (result: any) => {
+        console.log('result :', result);
+        this.womenProduct = result;
+      },
+      error: (error: any) => {
+        console.log('error', error);
+      },
+    });
+  }
   getWomenTrendingProduct() {
     this.productService.getProductFromCategory('Women').subscribe({
       next: (result: any) => {

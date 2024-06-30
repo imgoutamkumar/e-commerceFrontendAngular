@@ -51,10 +51,12 @@
     .slider_items {
       position: absolute;
       z-index: 0;
-      left: 70px;
-      top: 0;
-      height: 550px;
-      width: 430px;
+      left: 80px;
+      top: -7%;
+      //height: 612px;
+      //width: 459px;
+      height: 591px;
+      width: 443px;
       margin: 20px 10px 20px 40px;
       transition: z-index 250ms;
 
@@ -69,6 +71,7 @@
         transform: scale(0);
         opacity: 0;
         border-radius: 6px;
+        object-fit: cover;
       }
       &.hideLeft {
         .slider_image {
@@ -121,7 +124,7 @@
     transition: 0.3s;
   }
   .add-to-cart-button:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
   }
   .add-to-wishlist-button {
     height: 44px;
@@ -129,13 +132,14 @@
     font-size: 14px;
     margin-right: 20px;
     background-color: rgb(255, 255, 255);
+    border: 2px solid #ff004f;
     color: #ff004f;
     padding: 15px 50px 15px;
     margin-top: 10px;
     transition: 0.3s;
   }
   .add-to-wishlist-button:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
   }
 }
 

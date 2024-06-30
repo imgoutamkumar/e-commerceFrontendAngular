@@ -17,6 +17,17 @@ export class CartService {
     return this.http.get<any>(`${this.baseUrl}/api/cart/`, { headers });
   }
 
+  addToCart(cartData: any) {
+    console.log(cartData);
+    let headers = new HttpHeaders().set(
+      'Authorization',
+      `bearer ${localStorage.getItem('token')}`
+    );
+    return this.http.post<any>(`${this.baseUrl}/api/cart/add/`, cartData, {
+      headers,
+    });
+  }
+
   removeItemFromCart(productId: string) {
     let headers = new HttpHeaders().set(
       'Authorization',
