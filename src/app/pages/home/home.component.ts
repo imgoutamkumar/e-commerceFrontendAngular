@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit, OnChanges {
 
   brand: string = 'Biba';
   getOfferProducts(tileData: any) {
-    console.log('tileData emited:', tileData);
+    //console.log('tileData emited:', tileData);
     this.route.navigate(['products'], {
       queryParams: {
         brand: tileData.brand,
@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit, OnChanges {
   getWomenTrendingProduct() {
     this.productService.getProductByCategoryAndRating('Women', 3.5).subscribe({
       next: (result: any) => {
-        console.log('result :', result);
+        //console.log('result :', result);
         this.womensTrendingProduct = result;
       },
       error: (error: any) => {
@@ -78,7 +78,7 @@ export class HomeComponent implements OnInit, OnChanges {
   getMenTrendingProduct() {
     this.productService.getProductByCategoryAndRating('Men', 3.5).subscribe({
       next: (result: any) => {
-        console.log('result :', result);
+        //console.log('result :', result);
         this.mensTrendingProduct = result;
       },
       error: (error: any) => {
@@ -130,7 +130,7 @@ export class HomeComponent implements OnInit, OnChanges {
 
   womensOffer: any = [
     {
-      text: 'https://www.biba.in/on/demandware.static/-/Library-Sites-BibaSharedLibrary/en_IN/dw5faa5043/new_upload/mid-banner/rb-may21-dom.jpg',
+      text: 'https://www.biba.in/on/demandware.static/-/Library-Sites-BibaSharedLibrary/en_IN/dwe54c5c87/AW24/liva-aug22.jpg',
       cols: 2,
       rows: 3,
       color: 'lightblue',

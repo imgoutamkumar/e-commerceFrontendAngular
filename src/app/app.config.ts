@@ -13,6 +13,7 @@ import {
   provideHttpClient,
   withFetch,
 } from '@angular/common/http';
+import { provideStore } from '@ngrx/store';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,5 +24,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     provideHttpClient(withFetch()),
+    provideStore(),
   ],
 };

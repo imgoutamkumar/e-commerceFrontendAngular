@@ -21,12 +21,11 @@
 
   <span
     style="
-      margin-right: 25px;
       background-color: #ff004f;
+      margin-right: 25px;
       padding: 1px;
       border-radius: 22px;
       display: flex;
-      align-items: center;
     "
   >
     <form [formGroup]="searchForm" (ngSubmit)="search()">
@@ -58,6 +57,7 @@
       </button>
     </form>
   </span>
+
   <button
     ngbPopover="functionality not working!"
     triggers="mouseenter:mouseleave"
@@ -101,10 +101,10 @@
   </a>
 
   @if (loggedIn) {
-  <div class="profile-icon" [matMenuTriggerFor]="profileMenu">
+  <div class="w-[44px] h-[44px] rounded-full" [matMenuTriggerFor]="profileMenu">
     <img
       src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-      class="profile-icon-image"
+      class="h-full w-full object-cover rounded-full"
     />
   </div>
   }@else {
@@ -136,7 +136,7 @@
   <button
     mat-menu-item
     [matMenuTriggerFor]="category"
-    (click)="getSubCategories(category)"
+    (focus)="getSubCategories(category)"
   >
     {{ category }}
   </button>
@@ -145,6 +145,16 @@
   <button mat-menu-item [matMenuTriggerFor]="womens">Women</button>
 </mat-menu>
 
+<mat-menu #Men="matMenu">
+  @for (subCategory of subCategories; track $index) {
+  <button mat-menu-item [matMenuTriggerFor]="subCategory">
+    {{ subCategory }}
+  </button>
+
+  <button mat-menu-item>{{ subCategory }}</button>
+
+  }
+</mat-menu>
 <mat-menu #Men="matMenu">
   @for (subCategory of subCategories; track $index) {
   <button mat-menu-item [matMenuTriggerFor]="subCategory">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartItemComponent } from '../../components/cart-item/cart-item.component';
 import { MatCardModule } from '@angular/material/card';
@@ -31,7 +31,7 @@ declare var Razorpay: any;
     MatProgressSpinnerModule,
   ],
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, AfterContentChecked {
   //cartCheckOutForm: FormGroup;
   constructor(
     private cartService: CartService,
@@ -41,6 +41,9 @@ export class CartComponent implements OnInit {
     /*  this.cartCheckOutForm = this.fb.group({
       amount: ['', Validators.required],
     }); */
+  }
+  ngAfterContentChecked(): void {
+    console.log('ngAfterContentChecked called');
   }
   ngOnInit(): void {
     this.showCartItems();

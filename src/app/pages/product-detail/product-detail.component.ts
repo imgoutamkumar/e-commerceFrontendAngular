@@ -55,7 +55,7 @@ export class ProductDetailComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.cartFormGroup = this.fb.group({
-      quantity: '',
+      quantity: 1,
       size: ['', Validators.required],
     });
   }
@@ -106,7 +106,7 @@ export class ProductDetailComponent implements OnInit {
       this.activatedRoute.paramMap.subscribe({
         next: (value: any) => {
           const { quantity, size } = this.cartFormGroup.value;
-          this.cartData.productId = value.get('id');
+          this.cartData.productId = value.get('id').toString();
           this.cartData.quantity = quantity;
           this.cartData.size = size;
           console.log('this.cartData', this.cartData);
