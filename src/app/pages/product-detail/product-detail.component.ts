@@ -92,13 +92,14 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-  quantity = 1;
-  size = '';
+  /* quantity = 1;
+  size = ''; */
   cartData = {
     productId: '',
     quantity: 1,
     size: '',
   };
+
   addItemToCart() {
     console.log('cart button clicked');
     if (this.cartFormGroup.valid) {
@@ -107,7 +108,7 @@ export class ProductDetailComponent implements OnInit {
         next: (value: any) => {
           const { quantity, size } = this.cartFormGroup.value;
           this.cartData.productId = value.get('id').toString();
-          this.cartData.quantity = quantity;
+          this.cartData.quantity = parseInt(quantity);
           this.cartData.size = size;
           console.log('this.cartData', this.cartData);
           this.cartService.addToCart(this.cartData).subscribe({
@@ -125,6 +126,7 @@ export class ProductDetailComponent implements OnInit {
       });
     }
   }
+
   addItemToWishlist() {
     this.activatedRoute.paramMap.subscribe({
       next: (value: any) => {
